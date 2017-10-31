@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Perico</title>
-</head>
-<body>
-	<form action="./Controller/loginController.php" method="POST">
-		<label for="User"></label>
-		<input type="text" name="User" placeholder="Usuario o Correo" required>
-		<label for="Pass"></label>
-		<input type="password" name="Pass" placeholder="Contraseña" required>
-		<input type="submit" name="Submit">
-	</form>
-</body>
-</html>
+<?php
+	require_once('./Controller/loginController.php');
+	session_start();
+	if(!isset($_SESSION['ID']) and !isset($_SESSION['Level'])){
+		include('./View/home.php');
+		if(isset($_POST['Submit'])){
+			$Login = new loginController($_POST['User'], $_POST['Pass']);
+			$Login->Login();
+		}
+	}else{
+		header("Location: ./Perico.php");
+	}
+	
+?>

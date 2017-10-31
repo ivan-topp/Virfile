@@ -1,14 +1,18 @@
 <?php
-	require_once('../Db/db.php');
-	require_once('../Model/loginModel.php');
-	if(isset($_POST['Submit'])){
-		session_start();
-		$Status= new login_Model;
-		if($Status->login_access($_POST["User"],$_POST["Pass"])==True){
-			header("Location: ../Perico.php");
+	require_once('./Model/loginModel.php');
+	class loginController{
+		function __construct($user, $pass){
+			$this->User = $user;
+			$this->Pass = $pass;
+			$this->Model = new login_Model();
 		}
-		else{
-			echo "Error";
+		function Login(){
+			$status = $this->Model->login_access($this->User, $this->Pass);
+			if($status == true){
+				header("Location: ./Perico.php");
+			}else{
+				header("Location: ./View/error.php?error=Error de autenticacion.");
+			}
 		}
 	}
 ?>

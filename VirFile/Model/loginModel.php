@@ -1,6 +1,7 @@
 <?php
+	require_once('./Db/db.php');
 	class login_Model{
-		private $sql = "SELECT * FROM user WHERE (User_Name = :user1 OR Mail = :user2) AND Password = :pass LIMIT 1;";
+		private $sql = "SELECT * FROM USUARIO WHERE (NombreUsuario = :user1 OR Correo = :user2) AND Contrasena = :pass LIMIT 1;";
 		private $db;
 
 		function __construct(){
