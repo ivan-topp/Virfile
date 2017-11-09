@@ -41,6 +41,7 @@
 			<input type="password" name="Pass" placeholder="Contraseña" required>
 			<input type="submit" name="Submit">
 		</form>
+		<?php include('./View/footer.php');?>
 	</div>
 	<script src="./Resources/Jquery/jquery-3.2.1.min.js">"></script>
 	<script src="./Resources/Bootstrap/js/bootstrap.min.js">"></script>

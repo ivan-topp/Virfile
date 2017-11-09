@@ -1,6 +1,8 @@
 .service{
 	background-color: #28B463;
 	height: 100vh;
+	padding-left: 10vw;
+	padding-right: 10vw;
 	font-family: Century Gothic, Georgia;
 }
 .center{
@@ -20,10 +22,20 @@
 	font-size: 4vh;
 }
 .contacto{
+	padding-left: 10vw;
+	padding-right: 10vw;
 	background-color: #D7DBDD;
 	/*height: 70vh;*/
 }
 .About-us{
+	padding-left: 10vw;
+	padding-right: 10vw;
 	background-color: #5DADE2;
 	/*height: 50vh;*/
+}
+.footer{
+	color: #D6DBDF;
+	padding-left: 10vw;
+	padding-right: 10vw;
+	background-color: #34495E;
 }
