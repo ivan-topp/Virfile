@@ -1,0 +1,17 @@
+.service{
+	background-color: #28B463;
+	height: 100vh;
+	font-family: Century Gothic, Georgia;
+}
+.center{
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+    text-align: center;
+}
+.center > h1{
+	font-size: 8vh;
+}
+.center > p{
+	font-size: 4vh;
+}
