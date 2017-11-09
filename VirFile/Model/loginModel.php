@@ -13,11 +13,14 @@
 			$query->execute(array(':user1'=>$User,':user2'=>$User,':pass'=>$Pass));
 			$rows=$query->fetch(PDO::FETCH_ASSOC);
 			if($query->rowCount()>0){
-				return True;
+				return $rows;
 			}
 			else{
 				return False;
 			}
+		}
+		function logout(){
+			$this->db -> free();
 		}
 	}
 ?>

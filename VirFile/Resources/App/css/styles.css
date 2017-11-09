@@ -9,9 +9,21 @@
 	transform: translateY(-50%);
     text-align: center;
 }
-.center > h1{
+.center > h1,
+.About-us > div > h1,
+.contacto > div > h1{
 	font-size: 8vh;
 }
-.center > p{
+.center > p,
+.About-us > div > p,
+.contacto > div > p{
 	font-size: 4vh;
+}
+.contacto{
+	background-color: #D7DBDD;
+	/*height: 70vh;*/
+}
+.About-us{
+	background-color: #5DADE2;
+	/*height: 50vh;*/
 }
