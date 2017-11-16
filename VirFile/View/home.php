@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="./Resources/Bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="./resources/App/css/styles.css">
+<?php include('./View/header.php');?>
 	<title>VirFile</title>
 </head>
 <body>
@@ -36,14 +29,15 @@
 		</div>
 		<form action="" method="POST">
 			<label for="User"></label>
-			<input type="text" name="User" placeholder="Usuario o Correo" required>
+			<input type="text" id="User" name="User" placeholder="Usuario o Correo" required>
 			<label for="Pass"></label>
-			<input type="password" name="Pass" placeholder="Contraseña" required>
-			<input type="submit" name="Submit">
+			<input type="password" id="Pass" name="Pass" placeholder="Contraseña" required>
+			<input type="submit" name="Login" id="Login">
 		</form>
 		<?php include('./View/footer.php');?>
 	</div>
-	<script src="./Resources/Jquery/jquery-3.2.1.min.js">"></script>
-	<script src="./Resources/Bootstrap/js/bootstrap.min.js">"></script>
+	<script src="./Resources/Jquery/jquery-3.2.1.min.js"></script>
+	<script src="./Resources/Bootstrap/js/bootstrap.min.js"></script>
+	<script src="./Resources/App/js/Main.js"></script>
 </body>
 </html>

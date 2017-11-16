@@ -1,7 +1,7 @@
 <?php
 	require_once('./Db/db.php');
 	class login_Model{
-		private $sql = "SELECT * FROM USER WHERE (User_Name = :user1 OR Mail = :user2) AND Password = :pass LIMIT 1;";
+		private $sql = "SELECT * FROM USER WHERE (User_Name = :user1 OR Mail = :mail) AND Password = :pass LIMIT 1;";
 		private $db;
 
 		function __construct(){
@@ -10,7 +10,7 @@
 
 		function login_access($User,$Pass){
 			$query = $this -> db -> prepare($this -> sql);
-			$query->execute(array(':user1'=>$User,':user2'=>$User,':pass'=>$Pass));
+			$query->execute(array(':user1'=>$User,':mail'=>$User,':pass'=>$Pass));
 			$rows=$query->fetch(PDO::FETCH_ASSOC);
 			if($query->rowCount()>0){
 				return $rows;
@@ -20,7 +20,7 @@
 			}
 		}
 		function logout(){
-			$this->db -> free();
+			Database::free();
 		}
 	}
 ?>

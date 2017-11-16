@@ -1,26 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
+<?php
+	session_start();
+	if(!isset($_SESSION['ID']) and !isset($_SESSION['Level']) and !isset($User)){
+		header("Location: ./index.php");
+	}
+?>
+<?php include('./View/header.php');?>
 	<title>Hola</title>
 </head>
 <body>
 	<h1>Hi!!</h1>
 	<form action="" method="POST">
-		<input type="submit" name="Logout" value="Logout">
+		<input type="submit" name="Logout" id="Logout" value="Logout">
 	</form>
+	<script src="./Resources/Jquery/jquery-3.2.1.min.js"></script>
+	<script src="./Resources/Bootstrap/js/bootstrap.min.js"></script>
+	<script src="./Resources/App/js/Logged.js"></script>
 </body>
 </html>
-<?php
-	require_once('./Controller/userController.php');
-	session_start();
-	$aData = $_SESSION['UserData'];
-	$userController = new userController($aData["ID_User"], $aData["User_Name"], $aData["Enterprise"], $aData["Stock"], $aData["Name"], $aData["Mail"], $aData["Password"], $aData["user_Level"]);
-	if(isset($_POST["Logout"])){
-		unset($userController);
-		unset($_SESSION["UserData"]);
-		unset($_SESSION["ID"]);
-		unset($_SESSION["Level"]);
-		header("Location: ./index.php");
-	}
-?>

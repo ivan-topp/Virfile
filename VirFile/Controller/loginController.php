@@ -1,22 +1,21 @@
 <?php
 	require_once('./Model/loginModel.php');
-	require_once('./Controller/userController.php');
 	class loginController{
-		function __construct($user, $pass){
-			$this->User = $user;
-			$this->Pass = $pass;
+		function __construct(){
 			$this->Model = new login_Model();
 		}
-		function Login(){
-			$data = $this->Model->login_access($this->User, $this->Pass);
+		function Login($user, $pass){
+			$data = $this->Model->login_access($user, $pass);
 			if($data != false){
-				$_SESSION['ID'] = $data['ID_User']; $_SESSION['Level'] = $data['User_Level']; $_SESSION["UserData"] = $data;
-				header("Location: ./Perico.php");
+				$_SESSION['ID'] = $data['ID_User']; $_SESSION['Level'] = $data['User_Level'];
+				return $data;
 			}else{
-				header("Location: ./View/error.php?error=Error de autenticacion.");
+				return array ('Error'=>'Error de Autenticacion');
 			}
 		}
-		function logout(){
+		function Logout(){
+			unset($_SESSION["ID"]);
+			unset($_SESSION["Level"]);
 			$this->Model -> logout();
 		}
 	}
