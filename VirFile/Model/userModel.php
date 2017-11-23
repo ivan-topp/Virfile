@@ -20,24 +20,11 @@
 			}
 		}
 
-		public function ftpListDir(){
+		public function ftpListDir($dir){
 			if($this->login && $this->conn_id){
-				$buff = ftp_nlist($this->conn_id, ftp_pwd($this->conn_id));//ftp_rawlist($this->conn_id, $dir);
+				$buff = ftp_nlist($this->conn_id, ftp_pwd($this->conn_id).$dir.'/');//ftp_rawlist($this->conn_id, $dir);
 				$this->ftpFree();
 				return $buff;
-			}else{
-				return false;
-			}
-		}
-		public function cDir($dir){
-			if($this->login && $this->conn_id){
-				if(ftp_chdir($this->conn_id, $dir)){
-					$this->ftpFree();
-					return $buff;
-				}else{
-					$this->ftpFree();
-					return false;
-				}
 			}else{
 				return false;
 			}

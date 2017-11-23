@@ -14,16 +14,10 @@
 			}
 		}
 
-		public function ListDirectory(){
-			$res = $this->Model->ftpListDir();
+		public function ListDirectory($dir){
+			$res = $this->Model->ftpListDir($dir);
 			if($res != false) return $res;
 			else return array('Error'=>'Error al obtener los datos.');
 		}
-		public function changeDir($dir){
-			$res = $this->Model->cDir($dir);
-			/*if($res != false) return array('Result'=>'Directorio cambiado.');
-			else return array('Result'=>'Error al cambiar de directorio.');*/
-		}
-
 	}
 ?>

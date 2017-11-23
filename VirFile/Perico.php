@@ -19,7 +19,6 @@
 	</form>
 	<button type="button" id="List">ListDir</button>
 	<div id="lista"></div>
-
 	<script src="./Resources/Jquery/jquery-3.2.1.min.js"></script>
 	<script src="./Resources/Bootstrap/js/bootstrap.min.js"></script>
 	<script src="./Resources/App/js/Logged.js"></script>

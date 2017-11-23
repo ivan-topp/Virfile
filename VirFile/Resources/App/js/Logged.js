@@ -1,5 +1,16 @@
 get = function (id){return document.getElementById(id);}
 $(document).ready(function() {
+	var currentDir = "";
+	$.post("./Front.php",
+			{Action : "getUserId"},
+	    	function(data, status){
+	    		if(status != "success"){console.log("Error al realizar la peticion.");}
+	    		else{
+	    			currentDir = data;
+	    		}
+	        	
+	    });
+
     $('#Logout').click(function(event){
     	event.preventDefault();
 		var Datos = { Action : "Logout"};
@@ -40,16 +51,23 @@ $(document).ready(function() {
 	});
 
 	$('#List').click(function(event){
-    	var formData = new FormData();
-		var Data = { Action : "ListDir"};
+		console.log(currentDir);
+		var Data = { Action : "ListDir", Directory : currentDir.toString()};
 		$.post("./Front.php",
 			Data,
 	    	function(data, status){
 	    		if(status != "success"){console.log("Error al realizar la peticion.");}
 	    		else{
-	    			console.log("Data: " + data);
-	    			//location.reload();
+	    			data = JSON.parse(data);
+	    			for (var i = 0; i < data.length; i++) {
+	    				var Archivo = data[i].split('/');
+	    				$('#lista').append('<button class="contenido" id="'+Archivo[Archivo.length-1]+'">'+Archivo[Archivo.length-1]+'</button>');
+	    				console.log("Archivo: " + Archivo[Archivo.length-1]);
+	    			}
 	    		}
 	    });
+	});
+	$('body').on('click', '.contenido', function(){
+		alert($(this).attr('id'));
 	});
 });

@@ -10,13 +10,10 @@
 		        $data = $Login->Login($_POST['User'], $_POST['Pass']);
 		        if(!isset($data['Error'])){
 		        	$_SESSION["User_Data"] = $data;
-		        	$userController = new userController();
-		        	$userController->changeDir((string)$_SESSION["ID"]);
 		    	}
 				echo json_encode($data);
 		        break;
 		    case "Logout":
-		    	if(isset($userController)) unset($userController);
 		    	$Login->Logout();
 		        echo true;
 		        break;
@@ -32,9 +29,12 @@
 		    case "ListDir":
 		    	if(isset($_SESSION["User_Data"])){
 		    		$userController = new userController();
-					$res = $userController->ListDirectory();
+					$res = $userController->ListDirectory($_POST['Directory']);
 					echo json_encode($res);
 		    	}
+		    	break;
+		    case "getUserId":
+		    	if(isset($_SESSION['ID'])) echo $_SESSION['ID'];
 		    	break;
 		    /*case 2:
 		        echo "i es igual a 2";
