@@ -9,7 +9,9 @@
 		    case "Login":
 		        $data = $Login->Login($_POST['User'], $_POST['Pass']);
 		        if(!isset($data['Error'])){
-		        	$userController = new userController($data['ID_User'], $data['User_Name'], $data['Enterprise'], $data['Stock'], $data['Name'], $data['Mail'], $data['Password'], $data['User_Level']);
+		        	$_SESSION["User_Data"] = $data;
+		        	$userController = new userController();
+		        	$userController->changeDir((string)$_SESSION["ID"]);
 		    	}
 				echo json_encode($data);
 		        break;
@@ -19,19 +21,20 @@
 		        echo true;
 		        break;
 		    case "Up":
-		    	$conn_id = ftp_connect('127.0.0.1');
-				$login = ftp_login($conn_id, 'VirFile', 'admin');
-				if($login && $conn_id){
-					$name = $_FILES['upload']['name'];
+		    	if(isset($_SESSION["User_Data"])){
+		    		$userController = new userController();
+		    		$name = $_FILES['upload']['name'];
 					$temp = $_FILES["upload"]["tmp_name"];
-					if(ftp_put($conn_id, $_SESSION['ID'].'/'.$name, $temp,FTP_BINARY))
-						echo "Fichero subido correctamente";
-					else
-						echo "No ha sido posible subir el fichero";
-					ftp_close($conn_id);
-				}else{
-					echo "Error al conectar";
-				}	
+					$res = $userController->uploadFile($name, $temp);
+					echo $res['Result'];
+		    	}
+		    	break;
+		    case "ListDir":
+		    	if(isset($_SESSION["User_Data"])){
+		    		$userController = new userController();
+					$res = $userController->ListDirectory();
+					echo json_encode($res);
+		    	}
 		    	break;
 		    /*case 2:
 		        echo "i es igual a 2";

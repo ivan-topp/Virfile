@@ -8,7 +8,7 @@ $(document).ready(function() {
 	    	function(data, status){
 	    		if(status != "success"){console.log("Error al realizar la peticion.");}
 	    		else{
-	    			console.log("Data: " + data);
+	    			//console.log("Data: " + data);
 	    			location.reload();
 	    		}
 	        	
