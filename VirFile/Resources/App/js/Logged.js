@@ -14,4 +14,20 @@ $(document).ready(function() {
 	        	
 	    });
 	});
+	$('#UploadFile').submit(function(event){
+    	event.preventDefault();
+    	var form = $('form')[0];
+		var formData = new FormData();
+		formData.append('Action','Up');
+		formData.append('upload', $('input[type=file]')[0].files[0]);
+    	$.ajax({
+		    url: "./Front.php",
+		    data: formData,
+		    type: 'POST',
+		    contentType: false,
+		    processData: false,
+		}).done(function(data) {
+			  console.log(data);
+		});
+	});
 });

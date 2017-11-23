@@ -18,6 +18,21 @@
 		    	$Login->Logout();
 		        echo true;
 		        break;
+		    case "Up":
+		    	$conn_id = ftp_connect('127.0.0.1');
+				$login = ftp_login($conn_id, 'VirFile', 'admin');
+				if($login && $conn_id){
+					$name = $_FILES['upload']['name'];
+					$temp = $_FILES["upload"]["tmp_name"];
+					if(ftp_put($conn_id, $_SESSION['ID'].'/'.$name, $temp,FTP_BINARY))
+						echo "Fichero subido correctamente";
+					else
+						echo "No ha sido posible subir el fichero";
+					ftp_close($conn_id);
+				}else{
+					echo "Error al conectar";
+				}	
+		    	break;
 		    /*case 2:
 		        echo "i es igual a 2";
 		        break;*/

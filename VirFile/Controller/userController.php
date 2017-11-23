@@ -1,7 +1,11 @@
 <?php
 	require_once('./Model/userModel.php');
 	class userController{
-		function __contruct($id, $uname, $company, $stock, $name, $mail, $pass, $level){
+		function __contruct(){
+			
+			//$this->FTP_Cnx = ftp_connect('127.0.0.1')
+		}
+		function create($id, $uname, $company, $stock, $name, $mail, $pass, $level){
 			$this->id = $id;
 			$this->uname = $uname;
 			$this->company = $company;
@@ -12,6 +16,8 @@
 			$this->level = $level;
 			$this->Model = new userModel($this);
 		}
+
+
 
 	}
 ?>
