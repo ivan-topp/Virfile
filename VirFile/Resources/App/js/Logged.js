@@ -52,6 +52,7 @@ $(document).ready(function() {
 
 	$('#List').click(function(event){
 		console.log(currentDir);
+		$('.contenido').remove();
 		var Data = { Action : "ListDir", Directory : currentDir.toString()};
 		$.post("./Front.php",
 			Data,
