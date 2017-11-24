@@ -72,7 +72,7 @@
 				<div class="row url-search"><span style="margin-top: 2px;" class="glyphicon glyphicon-map-marker" style="margin-right: 2px;"></span> Perico:/</div>
 
 			</div>
-			<div class="row" style="height: 740px;margin-left: 30px;margin-right: 3px;margin-top: 20px;"> <!--CARPETAS!-->
+			<div class="row" style="height: 740px;margin-left: 30px;margin-right: 3px;margin-top: 20px; display: none"> <!--CARPETAS!-->
 				
 				<!--ARCHIVO O CARPETA-->
 				<div class="col-md-1 icon" "><div class="row folder-ico"></div><div class="row" style="height: 25%">Title</div></div>
@@ -94,11 +94,27 @@
 				<div class="col-md-1 icon" "><div class="row folder-ico"></div><div class="row" style="height: 25%">Title</div></div>
 				<!--ARCHIVO O CARPETA-->
 				<div class="col-md-1 icon" "><div class="row folder-ico"></div><div class="row" style="height: 25%">Title</div></div>
+			</div><!--CIERRE DE CARPETAS!-->
+			<div class="row" style="height: 740px;margin-left: 30px;margin-right: 3px;margin-top: 20px; display: block;"> <!--- INICIO DIV CONTROL DE USUARIOS -->
+				<input type="button" name="add_user" value="Agregar Usuarios">
+				<input type="button" name="delete_user" value="Eliminar Usuarios">
+				<br><br>
+				<table>
+					<tr>
+						<td>
+							Nombre de Usuario <input type="text" id="" name="" value=""><br>
+		
+							Nombre <input type="text" id="" name="" value=""><br>
+			
+							Mail <input type="text" id="" name="" value=""><br>
+				
+							Contraseña <input type="text" id="" name="" value=""><br>	
+						</td>
+					</tr>
+					
+				</table>
 
-
-
-		</div><!--CIERRE DE CARPETAS!-->
-
+			</div> <!--- CIERRE DIV CONTROL DE USUARIOS -->
 
 			<div style="margin-left: 3px;margin-right: 3px;margin-top: -30px;" class="row"><!--BARRA DE PROGRESO!-->
 				<div class="progress">
@@ -110,6 +126,10 @@
 			</div><!--BARRA DE PROGRESO!-->
 
 		</div><!--CIERRE DE DIV CARPETAS-->
+
+		
+
+
 
 		<div class="col-md-2 backright" >
 		
@@ -126,6 +146,7 @@
 				<button class="btn" style="width:110px; margin-bottom: 8px;" type=""><span class="glyphicon glyphicon-search"></span>  Buscar</button>
 				
 				<input style="width:110px; margin-bottom: 8px;" class="btn" type="submit" name="submit" value="Cargar" />
+				<input style="width:110px; margin-bottom: 8px;" class="btn" type="submit" name="Usuarios" value="Usuarios" />
 				</center>
 			</form>
 
