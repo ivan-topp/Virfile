@@ -58,10 +58,13 @@ $(document).ready(function() {
 	    	function(data, status){
 	    		if(status != "success"){console.log("Error al realizar la peticion.");}
 	    		else{
+	    			console.log(data);
 	    			data = JSON.parse(data);
 	    			for (var i = 0; i < data.length; i++) {
 	    				var Archivo = data[i].split('/');
-	    				$('#lista').append('<button class="contenido" id="'+Archivo[Archivo.length-1]+'">'+Archivo[Archivo.length-1]+'</button>');
+	    				var aux = Archivo[Archivo.length-1].split(',');
+	    				if(aux[1]=="File") $('#lista').append('<button class="contenido file" id="'+aux[0]+'">'+aux[0]+'</button>');
+	    				else $('#lista').append('<button class="contenido dire" id="'+aux[0]+'">'+aux[0]+'</button>');
 	    				console.log("Archivo: " + Archivo[Archivo.length-1]);
 	    			}
 	    		}

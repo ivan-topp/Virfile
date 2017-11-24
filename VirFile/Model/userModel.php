@@ -22,9 +22,19 @@
 
 		public function ftpListDir($dir){
 			if($this->login && $this->conn_id){
-				$buff = ftp_nlist($this->conn_id, ftp_pwd($this->conn_id).$dir.'/');//ftp_rawlist($this->conn_id, $dir);
+				$res = array();
+				$buff = ftp_nlist($this->conn_id, ftp_pwd($this->conn_id).$dir.'/');
+				sort($buff);
+				foreach ($buff as $c) {
+					str_replace(".","",$c,$i);
+					if($i==0){
+						array_push($res, $c.',Dire');
+					}else{
+						array_push($res, $c.',File');
+					}
+				}
 				$this->ftpFree();
-				return $buff;
+				return $res;
 			}else{
 				return false;
 			}
