@@ -1,50 +1,9 @@
-.service{
-	background-color: #28B463;
-	height: 100vh;
-	padding-left: 10vw;
-	padding-right: 10vw;
-	font-family: Century Gothic, Georgia;
-}
-.center{
-	position: relative;
-	top: 50%;
-	transform: translateY(-50%);
-    text-align: center;
-}
-.center > h1,
-.About-us > div > h1,
-.contacto > div > h1{
-	font-size: 8vh;
-}
-.center > p,
-.About-us > div > p,
-.contacto > div > p{
-	font-size: 4vh;
-}
-.contacto{
-	padding-left: 10vw;
-	padding-right: 10vw;
-	background-color: #D7DBDD;
-	/*height: 70vh;*/
-}
-.About-us{
-	padding-left: 10vw;
-	padding-right: 10vw;
-	background-color: #5DADE2;
-	/*height: 50vh;*/
-}
-.footer{
-	color: #D6DBDF;
-	padding-left: 10vw;
-	padding-right: 10vw;
-	background-color: #34495E;
-}
 html,body{width:100%;height:100%;padding:0;background:#fff;margin:0;font-family:arial}
 a { text-decoration:none }
-.containerlogin { width:262px; margin:0 auto; padding-top:200px; }
+.container { width:262px; margin:0 auto; padding-top:200px; }
 
 #bar { width:100%; height:35px; padding:15px 0; background:url(../images/bar.png) repeat-x; }
-#containerlogin { width:960px; margin:0 auto; }
+#container { width:960px; margin:0 auto; }
 
 /*-------LOGIN STARTS HERE -------*/
 

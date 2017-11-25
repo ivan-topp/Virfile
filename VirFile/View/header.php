@@ -6,3 +6,4 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="./Resources/Bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="./resources/App/css/styles.css">
+	<link rel="stylesheet" href="css/style.css" />
