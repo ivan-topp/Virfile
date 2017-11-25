@@ -44,6 +44,28 @@
 		    		//echo $_POST["DirectoryName"];
 		    	}
 		    	break;
+		    case "Remove":
+		    	if(isset($_SESSION['ID'])){
+		    		$userController = new userController();
+		    		$res = $userController->remove($_POST['Content'], $_POST['type']);
+		    		echo json_encode($res);
+		    	}
+		    	break;
+		    case "ChangeName":
+		    	if(isset($_SESSION['ID'])){
+		    		$userController = new userController();
+		    		$res = $userController->changeName($_POST['OldName'], $_POST['NewName']);
+		    		echo json_encode($res);
+		    	}
+		    	break;
+		    case "Download":
+		    	if(isset($_SESSION['ID'])){
+		    		$userController = new userController();
+		    		$res = $userController->download($_POST['Name'], $_POST['Path']);
+		    		echo json_encode($res);
+		    	}
+		    	//echo "Descargando: ".$_POST["Name"]." En la Ruta: ".$_POST["Path"];
+		    	break;
 		    /*case 2:
 		        echo "i es igual a 2";
 		        break;*/

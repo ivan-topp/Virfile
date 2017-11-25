@@ -21,7 +21,12 @@
 	<button type="button" id="Back">Volver</button>
 	<input type="text" id="nameDir">
 	<button type="button" id="mkdir">Crear Carpeta</button>
+	<button type="button" id="remove">Eliminar Seleccionados</button>
+	<input type="text" id="newName">
+	<button type="button" id="changeName">Cambiar Nombre</button>
 	<div id="lista"></div>
+	<div id="downloadAux" class="hidden"></div>
+	<input type="button" id="download" value="Descargar">
 	<script src="./Resources/Jquery/jquery-3.2.1.min.js"></script>
 	<script src="./Resources/Bootstrap/js/bootstrap.min.js"></script>
 	<script src="./Resources/App/js/Logged.js"></script>

@@ -11,6 +11,9 @@
 	transform: translateY(-50%);
     text-align: center;
 }
+.hidden{
+    display : none;
+}
 .center > h1,
 .About-us > div > h1,
 .contacto > div > h1{

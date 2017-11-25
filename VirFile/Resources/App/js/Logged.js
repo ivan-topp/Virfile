@@ -2,6 +2,7 @@ var get = function (id){return document.getElementById(id);}
 var currentDir = "";
 var UserId = "";
 var selectedContent = [];
+var valid1 = /^[a-zA-ZÀ-ÿ0-9 \u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ0-9 \u00f1\u00d1]*)*[a-zA-ZÀ-ÿ0-9 \u00f1\u00d1]+$/;
 var ListDir = function(){
 	setTimeout(function(){
 		//console.log(currentDir);
@@ -87,8 +88,9 @@ $(document).ready(function() {
 		ListDir();
 	});
 	$('body').on('click', '.contenido', function(){
-		if(selectedContent.indexOf($(this).attr('id')) == -1){
-			selectedContent.push($(this).attr('id'));
+		if(selectedContent.indexOf($(this).attr('id') + ', Dire') == -1 && selectedContent.indexOf($(this).attr('id') + ', File') == -1){
+			if($(this).attr('id').indexOf('.')>-1) selectedContent.push($(this).attr('id') + ', File');
+			else selectedContent.push($(this).attr('id') + ', Dire');
 		}else{
 			selectedContent.splice(selectedContent.indexOf($(this).attr('id')));
 		}
@@ -98,10 +100,10 @@ $(document).ready(function() {
 		selectedContent=[];
 		currentDir = currentDir + '/' + $(this).attr('id');
 		ListDir();
-		
 	});
 	$('#Back').click(function(){
 		if(currentDir != UserId){
+			selectedContent=[];
 			var aDir = currentDir.split('/');
 			currentDir = '';
 			aDir.forEach(function(val, indx){
@@ -116,27 +118,109 @@ $(document).ready(function() {
 		}
 	});
 	$('#mkdir').click(function(){
-		var valid1 = /^[a-zA-ZÀ-ÿ0-9 \u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ0-9 \u00f1\u00d1]*)*[a-zA-ZÀ-ÿ0-9 \u00f1\u00d1]+$/;
-		if(valid1.test($('#nameDir').val())){
+		if($('#nameDir').val() != ''){
+			if(valid1.test($('#nameDir').val())){
+				setTimeout(function(){
+					var Data = { Action : "CreateDir", DirectoryName : currentDir + '/' + $('#nameDir').val().trim()};
+					$.post("./Front.php",
+						Data,
+					   	function(data, status){
+					   		if(status != "success"){console.log("Error al realizar la peticion.");}
+					   		else{
+					   			data = JSON.parse(data);
+					   			if(Object.keys(data).indexOf('Error') == -1){
+					   				console.log(data);
+					   				ListDir();
+					   			}else console.log(data.Error);			
+					   		}
+					   });
+				}, 20);
+			}else{
+				console.log("Error, Solo debe ingresar letras o números (el espacio entremedio de palabras es válido)!");
+			}
+		}
+		//console.log($('#nameDir').val());
+	});
+	$('#remove').click(function(){
+		selectedContent.forEach(function (val, indx){
 			setTimeout(function(){
-				var Data = { Action : "CreateDir", DirectoryName : currentDir + '/' + $('#nameDir').val().trim()};
+				var Data = { Action : "Remove", Content : currentDir + '/' + val.split(',')[0], type : val.split(',')[1].trim()};
 				$.post("./Front.php",
 					Data,
 				   	function(data, status){
 				   		if(status != "success"){console.log("Error al realizar la peticion.");}
 				   		else{
+				   			selectedContent = [];
 				   			data = JSON.parse(data);
-				   			if(Object.keys(data).indexOf('Error') == -1){
-				   				console.log(data);
-				   				ListDir();
-				   			}else console.log(data.Error);			
+					   		if(Object.keys(data).indexOf('Error') == -1){
+					   			console.log(data);
+					   			ListDir();
+					   		}else console.log(data.Error);		
 				   		}
 				   });
 			}, 20);
+			//val = val.split(',')[0];
+			//console.log("Eliminando "+val);
+		});
+	});
+	$('#changeName').click(function(){
+		if(selectedContent.length == 1){
+			if($('#newName').val()!=""){
+				if(valid1.test($('#newName').val())){
+					setTimeout(function(){
+						var filename = selectedContent[0].split(',')[0].trim();
+						console.log((/[.]/.exec(filename)) ? /[^.]+$/.exec(filename)[0] : false);
+						var extension = (/[.]/.exec(filename)) ? /[^.]+$/.exec(filename)[0] : false;
+						if(extension!=false) var Data = { Action : "ChangeName", OldName : currentDir + '/' + selectedContent[0].split(',')[0].trim(), NewName : currentDir + '/' + $('#newName').val().trim() + '.' + extension};
+						else var Data = { Action : "ChangeName", OldName : currentDir + '/' + selectedContent[0].split(',')[0].trim(), NewName : currentDir + '/' + $('#newName').val().trim()};
+						$.post("./Front.php",
+							Data,
+						   	function(data, status){
+						   		if(status != "success"){console.log("Error al realizar la peticion.");}
+						   		else{
+						   			data = JSON.parse(data);
+							   		if(Object.keys(data).indexOf('Error') == -1){
+							   			console.log(data);
+							   			ListDir();
+							   			selectedContent = [];
+							   		}else console.log(data.Error);	
+						   		}
+						   });
+					}, 20);
+				}else{
+					console.log("Error, Solo debe ingresar letras o números (el espacio entremedio de palabras es válido)!");
+				}
+			}				
 		}else{
-			console.log("Error, Solo debe ingresar letras o números (el espacio entremedio de palabras es válido)!");
+			console.log("Por favor selecciona solo un archivo.");
 		}
-		
-		//console.log($('#nameDir').val());
+	});
+	$('#download').click(function(){
+		if(selectedContent.length == 1){
+			if(selectedContent[0].split(',')[1].trim() != 'Dire'){
+				setTimeout(function(){
+					var Datos = { Action : "Download", Name : selectedContent[0].split(',')[0], Path : currentDir + '/' + selectedContent[0].split(',')[0]};
+					$.post("./Front.php",
+						Datos,
+				    	function(data, status){
+				    		if(status != "success"){console.log("Error al realizar la peticion.");}
+				    		else{
+				    			console.log("Data: " + data);
+				    			data = JSON.parse(data);
+							   	if(Object.keys(data).indexOf('Error') == -1){
+							   		console.log(selectedContent[0].split(',')[0]);
+							   		$('#downloadAux').removeClass('hidden');
+							   		$('#downloadAux').html('<a id="Down" href="http://127.0.0.1:8090/Lenguaje%20de%20Marcado/VirFile/Downloads/'+selectedContent[0].split(',')[0]+'" download="'+selectedContent[0].split(',')[0]+'">Descargar: '+selectedContent[0].split(',')[0]+'</a>');
+							   		selectedContent = [];
+							   	}else console.log(data.Error);
+				    		}
+				    });
+				}, 20);
+			}
+		}else console.log("Por favor antes selecciona un archivo.");
+	});
+	$('#downloadAux').click( function(){
+		$('#downloadAux').addClass('hidden');
+		$('#Down').remove();
 	});
 });

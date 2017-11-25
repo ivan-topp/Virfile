@@ -29,12 +29,9 @@
 				if($buff != false){
 					sort($buff);
 					foreach ($buff as $c) {
-						str_replace(".","",$c,$i);
-						if($i==0){
-							array_push($res, $c.',Dire');
-						}else{
-							array_push($res, $c.',File');
-						}
+						$info = new SplFileInfo($c);
+						if($info->getExtension() != '') array_push($res, $c.',File');
+						else array_push($res, $c.',Dire');
 					}
 				}
 				if(sizeof($res)==0){
@@ -62,6 +59,56 @@
 			}else{
 				return false;
 			}
+		}
+
+		public function ftpRemoveFile($name){
+			if($this->login && $this->conn_id){
+				if (ftp_delete($this->conn_id, $name)) {
+					$this->ftpFree();
+					return array('Result'=>'Archivo eliminado Satisfactoriamente.');
+				} else {
+					$this->ftpFree();
+					return false;
+				}
+			}
+			else return false;
+		}
+		public function ftpRemoveDirectory($name){
+			if($this->login && $this->conn_id){
+				if (ftp_rmdir($this->conn_id, $name)) {
+					$this->ftpFree();
+					return array('Result'=>'Directorio eliminado Satisfactoriamente.');
+				} else {
+					$this->ftpFree();
+					return false;
+				}
+			}
+			else return false;	
+		}
+		public function ftpChangeName($oldname, $newname){
+			if($this->login && $this->conn_id){
+				if (ftp_rename($this->conn_id, $oldname, $newname)) {
+					$this->ftpFree();
+					return array('Result'=>'Nombre Cambiado Satisfactoriamente.');
+				} else {
+					$this->ftpFree();
+					return false;
+				}
+			}
+			else return false;
+		}
+
+		public function ftpDownload($name, $path){
+			if($this->login && $this->conn_id){
+				if (ftp_get($this->conn_id, './Downloads/'.$name, $path, FTP_BINARY)) {
+					$this->ftpFree();
+					return array('Result'=>'Descarga Completada con exito.');
+				} else {
+					$this->ftpFree();
+					return false;
+				}
+			}
+			else return false;
 		}
 
 		public function ftpFree(){
