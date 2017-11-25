@@ -36,6 +36,14 @@
 		    case "getUserId":
 		    	if(isset($_SESSION['ID'])) echo $_SESSION['ID'];
 		    	break;
+		    case "CreateDir":
+		    	if(isset($_SESSION['ID'])){
+		    		$userController =  new userController();
+		    		$res = $userController->createDir($_POST["DirectoryName"]);
+		    		echo json_encode($res);
+		    		//echo $_POST["DirectoryName"];
+		    	}
+		    	break;
 		    /*case 2:
 		        echo "i es igual a 2";
 		        break;*/

@@ -18,6 +18,9 @@
 		<input type="submit" name="Logout" id="Logout" value="Logout">
 	</form>
 	<button type="button" id="List">ListDir</button>
+	<button type="button" id="Back">Volver</button>
+	<input type="text" id="nameDir">
+	<button type="button" id="mkdir">Crear Carpeta</button>
 	<div id="lista"></div>
 	<script src="./Resources/Jquery/jquery-3.2.1.min.js"></script>
 	<script src="./Resources/Bootstrap/js/bootstrap.min.js"></script>
