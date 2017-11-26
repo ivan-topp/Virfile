@@ -65,7 +65,6 @@
 	</div>
 	<script src="./Resources/Jquery/jquery-3.2.1.min.js"></script>
 	<script src="./Resources/Bootstrap/js/bootstrap.min.js"></script>
-	<script src="./Resources/Bootstrap/js/style.js"></script>
 	<script src="./Resources/App/js/Main.js"></script>
 	<script src="./Resources/App/js/login.js"></script>
 	
