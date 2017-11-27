@@ -5,7 +5,7 @@
 	}
 	echo "TU USER : ".$_SESSION['ID']."<br>";
 	echo "TU LEVEL: ".$_SESSION['Level']."<br>";
-	echo "TU LEVEL: ".$_SESSION['Enterprise'];
+	echo "TU EMPRESA: ".$_SESSION['Enterprise'];
 ?>
 <?php include('./View/header.php');?>
 
