@@ -10,7 +10,7 @@ $(document).ready(function() {
 	    		else{
 	    			data = JSON.parse(data);
 	    			if(Object.keys(data).indexOf('Error') == -1){
-	    				location.href='./user.php';
+	    				location.reload();
 	    			}else $('#loginError').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert">&times;</a><strong>Error!</strong> Los datos ingresados no coinciden, asegurate de haber ingresado bien tus datos.</div>');
 	    		}
 	        	
