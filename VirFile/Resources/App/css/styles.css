@@ -209,3 +209,78 @@ fieldset#body {
 input:focus {
     outline:none;
 }
+.Down{
+	display: block;
+}
+.mar0{
+	margin: 0px;
+	padding: 0px;
+}
+.options{
+	padding-bottom: 2vh;
+	padding-left: 2vh;
+	padding-right: 2vh;
+	padding-top: 2vh;
+	background-color: #CCD1D1;
+	min-height: 95vh;
+}
+#navFile{
+	padding-bottom: 2vh;
+	padding-left: 2vh;
+	padding-right: 2vh;
+	padding-top: 2vh;
+	background-color: #E5E8E8;
+	height: 95vh;
+	overflow-y: scroll;
+}
+.file-input {
+    width: 0;
+  	position: relative;
+}
+.file-input::before {
+    content: 'Seleccionar Archivos';
+    display: inline-block;
+    margin-bottom: 1px;
+    color: #333;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+  	cursor: pointer;
+  	font-size: 14px;
+  	font-weight: normal;
+  	position: absolute;
+}
+.file-input:hover {
+	color: #333;
+  	background-color: #e6e6e6;
+  	border-color: #adadad;
+}
+#selecteds{
+	margin-top: 10px;
+}
+.contenido{
+	width: 20%;
+	height: 20%;
+	display: inline-block;
+	text-align: center;
+	font-size: 1.2vw;
+}
+.contenido img{
+	width: 30%;
+	margin-left: 10px;
+	height: auto;
+}
+.selected{
+	border: 1px solid black;
+}
+.navStyle{
+	border: none;
+	background-color: white;
+}
+#btnLogin{
+	background-color: transparent;
+}

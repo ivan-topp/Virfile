@@ -4,7 +4,7 @@
 		include('./View/home.php');
 	}else{
 		if($_SESSION['Level']==0){
-			header("Location: ./Perico.php");
+			header("Location: ./user.php");
 		}
 		if($_SESSION['Level']==1){
 			header("Location: ./vistadmin.php");

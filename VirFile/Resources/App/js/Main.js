@@ -8,8 +8,10 @@ $(document).ready(function() {
 	    	function(data, status){
 	    		if(status != "success"){console.log("Error al realizar la peticion.");}
 	    		else{
-	    			//console.log("Data: " + data);
-	    			location.reload();
+	    			data = JSON.parse(data);
+	    			if(Object.keys(data).indexOf('Error') == -1){
+	    				location.href='./user.php';
+	    			}else $('#loginError').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert">&times;</a><strong>Error!</strong> Los datos ingresados no coinciden, asegurate de haber ingresado bien tus datos.</div>');
 	    		}
 	        	
 	    });

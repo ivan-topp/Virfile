@@ -9,7 +9,7 @@
 
 		public function upFile($name, $temp){
 			if($this->login && $this->conn_id){
-				if(ftp_put($this->conn_id, $_SESSION['ID'].'/'.$name, $temp,FTP_BINARY)){
+				if(ftp_put($this->conn_id, $name, $temp,FTP_BINARY)){
 					$this->ftpFree();
 					return true;
 				}else{
@@ -64,26 +64,55 @@
 		public function ftpRemoveFile($name){
 			if($this->login && $this->conn_id){
 				if (ftp_delete($this->conn_id, $name)) {
-					$this->ftpFree();
 					return array('Result'=>'Archivo eliminado Satisfactoriamente.');
 				} else {
-					$this->ftpFree();
 					return false;
 				}
 			}
-			else return false;
+			else{
+				$this->conn_id = ftp_connect('127.0.0.1');
+				$this->login = ftp_login($this->conn_id, 'VirFile', 'admin');
+				$this->ftpRemoveFile($name);
+			}		
 		}
 		public function ftpRemoveDirectory($name){
 			if($this->login && $this->conn_id){
-				if (ftp_rmdir($this->conn_id, $name)) {
-					$this->ftpFree();
-					return array('Result'=>'Directorio eliminado Satisfactoriamente.');
-				} else {
-					$this->ftpFree();
-					return false;
+				$buff = ftp_nlist($this->conn_id, ftp_pwd($this->conn_id).$name.'/');
+				if($buff != false){
+					sort($buff);
+					foreach ($buff as $c) {
+						$info = new SplFileInfo($c);
+						if($info->getExtension() != ''){
+							$res = $this->ftpRemoveFile($c);
+							if($res == false){							
+								return false;
+							}
+						}
+						else{
+							$res = $this->ftpRemoveDirectory($this->conn_id, $c);
+							if($res == false){
+								return false;
+							}
+						}
+					}
+					if (ftp_rmdir($this->conn_id, $name)) {
+						return array('Result'=>'Directorio eliminado Satisfactoriamente.');
+					} else {
+						return false;
+					}
+				}else{
+					if (ftp_rmdir($this->conn_id, $name)) {
+						return array('Result'=>'Directorio eliminado Satisfactoriamente.');
+					} else {
+						return false;
+					}
 				}
 			}
-			else return false;	
+			else{
+				$this->conn_id = ftp_connect('127.0.0.1');
+				$this->login = ftp_login($this->conn_id, 'VirFile', 'admin');
+				$this->ftpRemoveDirectory($name);
+			}
 		}
 		public function ftpChangeName($oldname, $newname){
 			if($this->login && $this->conn_id){

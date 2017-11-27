@@ -2,40 +2,11 @@
 	<title>VirFile</title>
 </head>
 <body>
-	<div id="bar">
-        <div id="containerlogin">
-        	
-        	<button> <a href="#ofrecemos"> Que Ofrecemos</a></button>
-        	<button> <a href="#Nosotros"> Nosotros</a></button>
-        	<button> <a href="#contacto"> contacto</a></button>
-
-            <!-- Login Starts Here -->
-            <div id="loginContainer">
-                <a href="#" id="loginButton"><span>Login</span><em></em></a>
-                <div style="clear:both"></div>
-                <div id="loginBox">                
-                    <form id="loginForm" method="POST">
-                        <fieldset id="body">
-                            <fieldset>
-                                <label for="User"></label>
-								<input type="text" id="User" name="User" placeholder="Usuario o Correo" required>
-                            </fieldset>
-                            <fieldset>
-                                <label for="Pass"></label>
-								<input type="password" id="Pass" name="Pass" placeholder="Contraseña" required>
-								
-                            </fieldset>
-                            <input type="submit" name="Login" id="Login">
-                        </fieldset>
-                        <br>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+	<?php include('./View/nav.php');?>
+	<?php include('./View/loginModal.html');?>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-xs-12 service">
+			<div id="service" class="col-xs-12 service">
 				<div class="center">
 					<a name="ofrecemos"></a>
 					<h1>¿Qué Ofrecemos?</h1>

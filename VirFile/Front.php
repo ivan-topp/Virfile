@@ -20,7 +20,7 @@
 		    case "Up":
 		    	if(isset($_SESSION["User_Data"])){
 		    		$userController = new userController();
-		    		$name = $_FILES['upload']['name'];
+		    		$name = $_POST["curDir"].'/'.$_FILES['upload']['name'];
 					$temp = $_FILES["upload"]["tmp_name"];
 					$res = $userController->uploadFile($name, $temp);
 					echo $res['Result'];
