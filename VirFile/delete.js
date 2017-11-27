@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $("btndelete").click(function(event){
+    $("#btndelete").click(function(event){
     	event.preventDefault();
 		var Datos = { Action : "delete"};
 		$.post("./recibe.php",
