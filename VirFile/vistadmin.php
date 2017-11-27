@@ -43,19 +43,24 @@
 			      		<div class="dropdown">
 							
 
-							<form action="index.php" method="POST">
+							
 
-				      		<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Perico
-							  <span class="glyphicon glyphicon-user"></span>
-							  <ul class="dropdown-menu">
-							    <li><a href="#">Mi cuenta</a></li>
-							    <li><a href="#">Cambiar Imagen</a></li>
-							    <li><a href="#">Salir</a></li>
-							  </ul>
-							</button>
-							<input type="submit" name="Logout" id="Logout" value="Logout" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" value="Salir"></input>
+				      		
+					<div class="dropdown">
+							<form action="index.php" method="POST">
+				      				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><?php echo $_SESSION["ID"]; ?>
+								  <span class="glyphicon glyphicon-user"></span>
+								  <ul class="dropdown-menu">
+								    <li><a href="#">Mi cuenta</a></li>
+								    <li><a href="#">Cambiar Imagen</a></li>
+								    <li><a href="#">Salir</a></li>
+								  </ul>
+								</button>
+								<input type="submit" name="Logout" id="Logout" value="Logout" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" value="Salir"></input>
+								<input id="btnlist1" value="Listar Usuarios" name="btnlist" class="btn" style="width:110px; margin-bottom: 8px;" type="submit"></input>
+								<input type="hidden" name="empre" value= <?php echo $_SESSION['Enterprise']; ?> >
 							</form>
-						<div>
+					<div>
 
 			      	</div>		      
 			    </ul>
@@ -169,6 +174,9 @@
 	<script src="./Resources/Bootstrap/js/bootstrap.min.js"></script>
 	<script src="./Resources/App/js/Logged.js"></script>
 	<script src="./Resources/App/js/crud_users.js"></script>
+		
+	<script src="./list.js"></script>
+	<script src="./delete.js"></script>
 
 </body>
 </html>
