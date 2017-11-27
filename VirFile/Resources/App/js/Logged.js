@@ -76,14 +76,14 @@ $(document).ready(function() {
 					formData.append('upload', input.files[i]);
 					formData.append('curDir', currentDir);
 					if(input.files[i].size < 104857600){
-				    	$.ajax({
+						$.ajax({
 						    url: "./Front.php",
 						    data: formData,
 						    type: 'POST',
 						    contentType: false,
 						    processData: false,
 						}).done(function(data) {
-							  console.log(data);
+							console.log(data);
 						});
 					}else $('#upError').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert">&times;</a><strong>Error!</strong> No se ha podido subir el archivo porque excede el limite de 100Mb.</div>'); 
     			}

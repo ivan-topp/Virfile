@@ -80,32 +80,26 @@
 				$buff = ftp_nlist($this->conn_id, ftp_pwd($this->conn_id).$name.'/');
 				if($buff != false){
 					sort($buff);
-					foreach ($buff as $c) {
-						$info = new SplFileInfo($c);
+					foreach ($buff as $c=>$v) {
+						$info = new SplFileInfo($v);
 						if($info->getExtension() != ''){
-							$res = $this->ftpRemoveFile($c);
+							$res = $this->ftpRemoveFile($v);
 							if($res == false){							
 								return false;
 							}
 						}
 						else{
-							$res = $this->ftpRemoveDirectory($this->conn_id, $c);
+							$res = $this->ftpRemoveDirectory($v);
 							if($res == false){
 								return false;
 							}
 						}
 					}
-					if (ftp_rmdir($this->conn_id, $name)) {
-						return array('Result'=>'Directorio eliminado Satisfactoriamente.');
-					} else {
-						return false;
-					}
-				}else{
-					if (ftp_rmdir($this->conn_id, $name)) {
-						return array('Result'=>'Directorio eliminado Satisfactoriamente.');
-					} else {
-						return false;
-					}
+				}
+				if (ftp_rmdir($this->conn_id, $name)) {
+					return array('Result'=>'Directorio eliminado Satisfactoriamente.');
+				} else {
+					return false;
 				}
 			}
 			else{
