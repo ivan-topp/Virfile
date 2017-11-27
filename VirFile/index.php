@@ -27,7 +27,7 @@
 						 ";
 				}
 				echo "</table>";
-				echo "<input type='submit' name='btndelete' value='ELIMINAR SELECCIONADOS'></input></form>";
+				echo "<input type='submit' id='btndelete' name='btndelete' value='ELIMINAR SELECCIONADOS'></input></form>";
 				//type="submit" name="Logout" id="Logout" value="Logout"
 				echo json_encode($res);
 			}
