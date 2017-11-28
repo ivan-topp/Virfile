@@ -36,7 +36,7 @@
 					<button type="button" id="remove" class="btn btn-default btn-block"><span class="glyphicon glyphicon-remove"></span> Eliminar Seleccionados</button>
 					<button type="button" class="btn btn-default btn-block" id="Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</button>
 				</div>
-			</div>	
+			</div>
 		</div>
 	</div>
 	<?php include('./View/footer.php');?>

@@ -41,7 +41,7 @@
 					if($this->updateStock($userStock + $size)){
 						if(ftp_put($this->conn_id, $name, $temp,FTP_BINARY)) $res = true;
 					}
-				}else $res = "Error de Capacidad";
+				}else{$res = "Error de Capacidad";}
 				$this->ftpFree();
 				return $res;
 			}else{

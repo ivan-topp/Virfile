@@ -20,49 +20,88 @@
 		        break;
 		    case "Up":
 		    	if(isset($_SESSION["User_Data"])){
-		    		$userController = new userController();
 		    		$name = $_POST["curDir"].'/'.$_FILES['upload']['name'];
 					$temp = $_FILES["upload"]["tmp_name"];
-					$res = $userController->uploadFile($name, $temp, $_FILES["upload"]['size']);
+					if($_SESSION['Level']==0){
+						$userController = new userController();
+						$res = $userController->uploadFile($name, $temp, $_FILES["upload"]['size']);
+					}
+					else if($_SESSION['Level']==1){
+						$adminController = new adminController();
+						$res = $adminController->uploadFile($name, $temp, $_FILES["upload"]['size']);
+					}
 					echo json_encode($res);
 		    	}
 		    	break;
 		    case "ListDir":
 		    	if(isset($_SESSION["User_Data"])){
-		    		$userController = new userController();
-					$res = $userController->ListDirectory($_POST['Directory']);
+		    		if($_SESSION['Level']==0){
+						$userController = new userController();
+						$res = $userController->ListDirectory($_POST['Directory']);
+		    		}
+		    		else if($_SESSION['Level']==1){
+		    			$adminController = new adminController();
+						$res = $adminController->ListDirectory($_POST['Directory']);
+		    		}
 					echo json_encode($res);
 		    	}
 		    	break;
 		    case "getUserId":
-		    	if(isset($_SESSION['ID'])) echo $_SESSION['Enterprise'].'/'.$_SESSION['ID'];
+		    	if(isset($_SESSION['ID'])){
+		    		if($_SESSION['Level'] == 0) echo $_SESSION['Enterprise'].'/'.$_SESSION['User_Data']['User_Name'];
+		    		else echo $_SESSION['Enterprise'];
+		    	} 
 		    	break;
 		    case "CreateDir":
 		    	if(isset($_SESSION['ID'])){
-		    		$userController =  new userController();
-		    		$res = $userController->createDir($_POST["DirectoryName"]);
+		    		if($_SESSION['Level']==0){
+		    			$userController =  new userController();
+		    			$res = $userController->createDir($_POST["DirectoryName"]);
+		    		}
+		    		else if($_SESSION['Level']==1) { 
+		    			$adminController =  new adminController();
+		    			$res = $adminController->createDir($_POST["DirectoryName"]);
+		    		}
 		    		echo json_encode($res);
 		    		//echo $_POST["DirectoryName"];
 		    	}
 		    	break;
 		    case "Remove":
 		    	if(isset($_SESSION['ID'])){
-		    		$userController = new userController();
-		    		$res = $userController->remove($_POST['Content'], $_POST['type']);
+		    		if($_SESSION['Level']==0){
+						$userController = new userController();
+			    		$res = $userController->remove($_POST['Content'], $_POST['type']);
+		    		}
+		    		else if($_SESSION['Level']==1){
+		    			$adminController = new adminController();
+			    		$res = $adminController->remove($_POST['Content'], $_POST['type']);
+		    		}
 		    		echo json_encode($res);
 		    	}
 		    	break;
 		    case "ChangeName":
 		    	if(isset($_SESSION['ID'])){
-		    		$userController = new userController();
-		    		$res = $userController->changeName($_POST['OldName'], $_POST['NewName']);
+		    		if($_SESSION['Level']==0){
+		    			$userController = new userController();
+			    		$res = $userController->changeName($_POST['OldName'], $_POST['NewName']);
+		    		}
+		    		else if($_SESSION['Level']==1){
+						$adminController = new adminController();
+			    		$res = $adminController->changeName($_POST['OldName'], $_POST['NewName']);
+		    		}	
 		    		echo json_encode($res);
 		    	}
 		    	break;
 		    case "Download":
 		    	if(isset($_SESSION['ID'])){
-		    		$userController = new userController();
-		    		$res = $userController->download($_POST['Name'], $_POST['Path']);
+		    		if($_SESSION['Level']==0){
+		    			$userController = new userController();
+			    		$res = $userController->download($_POST['Name'], $_POST['Path']);
+		    		}
+		    		else if($_SESSION['Level']==1){
+		    			$adminController = new adminController();
+			    		$res = $adminController->download($_POST['Name'], $_POST['Path']);
+		    		}	
 		    		echo json_encode($res);
 		    	}
 		    	//echo "Descargando: ".$_POST["Name"]." En la Ruta: ".$_POST["Path"];
@@ -71,9 +110,6 @@
 		    	$adm=new adminController();
 				$res = $adm->Listar();
 				if($res != false){
-					/*for ($i=0; $i <$res.count(); $i++) { 
-						$res
-					}*/
 					echo json_encode($res);
 				}else echo json_encode(array('Error'=>'ashdkahs'));
 				break;

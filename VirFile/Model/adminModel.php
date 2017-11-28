@@ -1,18 +1,18 @@
 <?php
+	require_once('./Model/userModel.php');
 	require_once('./Db/db.php');
-	class adminModel{
-
+	class adminModel extends userModel{
+		private $sqlUpdate = "UPDATE user SET Stock = :Stock WHERE ID_User = :User"; //Maximo = 209715200 Bytes
+		private $sqlGetStock = "SELECT Stock FROM user WHERE ID_User = :User LIMIT 1";
 		private $sql  = "SELECT * FROM USER WHERE Enterprise = :ep;";
 		private $sql1 = "DELETE FROM USER WHERE ID_User = :us;";
-		//SELECT * FROM `user` WHERE Enterprise="Empresa" AND User_Level=1
 		private $db;
-
-		function __construct($controller){
-			$this->controller = $controller;
+		function __construct(){
+			parent::__construct();
 		}
 
 		function User_List(){
-			$this->db = Database::Connect();
+			
 			//function login_access($User,$Pass){
 			$query = $this -> db -> prepare($this -> sql);
 			$query->execute(array(':ep'=>$_SESSION['Enterprise']));

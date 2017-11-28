@@ -1,5 +1,4 @@
 <?php
-	session_start();
 	if(!isset($_SESSION['ID']) and !isset($_SESSION['Level']) and !isset($User)){
 		header("Location: ./index.php");
 	}
@@ -10,7 +9,7 @@
 	echo "TU NOMBRE : ".$_SESSION['User_Name'];*/
 ?>
 <?php include('./View/header.php');?>
-<?php include('./createModal.php');?>
+<?php //include('./createModal.php');?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,8 +22,8 @@
 </head>
 <body>
 
-	<div class="container">
-
+	<div class="container-fluid">
+		
 		<div style="margin-top: -3px;" class="row">
 			<form action="index.php" method="post">
 			<nav class="navbar navbar-inverse">
@@ -45,7 +44,7 @@
 				
 				<div class="dropdown">
 					<form action="index.php" method="POST">
-						<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span><?php echo $_SESSION["User_Name"]; ?>
+						<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span><?php echo $_SESSION['User_Data']["User_Name"]; ?>
 							<ul class="dropdown-menu">
 								<li><a href="#">Mi cuenta</a></li>
 								<li><a href="#">Cambiar Imagen</a></li>
@@ -60,71 +59,51 @@
 			</nav>
 
 		</div>
-		
+		<?php include('./View/subirModal.html');?>
+		<?php include('./View/newFolderModal.html');?>
+		<?php include('./View/editNombreModal.html');?>
+		<?php include('./View/downloadModal.html');?>
 		<!--DIV CARPETAS-->
-		<div class="col-md-10 back" style="height: 800px;">
-
-			<!--URL-->
-			<div class="row">
-
-				<div class="row url-search"><span style="margin-top: 2px;" class="glyphicon glyphicon-map-marker" style="margin-right: 2px;"></span> Perico:/</div>
-
-			</div>	
-			<div class="row" style="height: 740px;margin-left: 30px;margin-right: 3px;margin-top: 20px; display: block;"> <!--- INICIO DIV CONTROL DE USUARIOS -->
-				<div id="Files">
-					
-				</div>				
-				<div id="Lista" class="hidden">
-					<table id="ListUsers" class="table table-responsive" border="1">
-					
-					
-					</table>
-					<input type="button" id='btndelete1' value="ELIMINAR SELECCIONADOS"></input>
-
+		<div class="row"> <!--- INICIO DIV CONTROL DE USUARIOS -->
+			<div id="Files">
+				<div class="col-md-9 col-xs-12 mar0">
+					<div id="navFile"></div>
 				</div>
-		</div><!--CIERRE DE DIV CARPETAS-->
-
-		
-
-
-
-		<div class="col-md-2 backright" >
-		
-			<form action="./index.php" method="POST" enctype="multipart/form-data" id="UploadFile">
-			<center>
-			<!--<input class="btn" style="width:110px; margin-top: 20px; margin-bottom: 8px;" type="submit" name="submit" value="Cargar"><span class="glyphicon glyphicon-floppy-open"></span></input>-->
-
-			<form action="./index.php" method="POST" enctype="multipart/form-data" id="UploadFile">
-				<input  name="upload" type="file" id="arch" /><br>
-
-				<button class="btn" style="width:110px; margin-bottom: 8px;" type=""><span class="glyphicon glyphicon-floppy-save"></span>  Descargar</button>
-				<button class="btn" style="width:110px; margin-bottom: 8px;" type=""><span class="glyphicon glyphicon-floppy-remove"></span>  Eliminar</button>
-				<button class="btn" style="width:110px; margin-bottom: 8px;" type=""><span class="glyphicon glyphicon-search"></span>  Buscar</button>
+				<div class="col-md-3 col-xs-12 mar0">
+					<div class="options">
+						<h1>Opciones</h1>
+						<button type="button" id="List" class="btn btn-default btn-block"><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+						<button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#modalSubir"><span class="glyphicon glyphicon-cloud-upload"></span> Subir Archivos</button>
+						<button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#modalLinkDonwload" id="download"><span class="glyphicon glyphicon-cloud-download"></span> Descargar Archivos</button>
+						<button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#modalNewFolder"><span class="glyphicon glyphicon-folder-open"></span> Nueva Carpeta</button>
+						<button type="button" id="openFolder" class="btn btn-default btn-block"><span class="glyphicon glyphicon-folder-open"></span> Abrir Carpeta</button>
+						<button type="button" class="btn btn-default btn-block" id="Back"><span class="glyphicon glyphicon-arrow-left"></span> Carpeta Anterior</button>
+						<button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#modalEditName"><span class="glyphicon glyphicon-pencil"></span> Editar Nombre</button>
+						<button type="button" id="remove" class="btn btn-default btn-block"><span class="glyphicon glyphicon-remove"></span> Eliminar Seleccionados</button>
+						<button type="button" class="btn btn-default btn-block" id="Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</button>
+					</div>
+				</div>
+			</div>
+		</div>
 				
-				<input style="width:110px; margin-bottom: 8px;" class="btn" type="submit" name="submit" id="" value="Cargar" />
-				<input style="width:110px; margin-bottom: 8px;" class="btn" type="submit" name="archivos" id="" value="archivos" />
-				</center>
-			</form>
+		<div class="row">
+			<div id="Lista" class="hidden">
+				<table id="ListUsers" class="table table-responsive" border="1">
+					
+					
+				</table>
+				<input type="button" id='btndelete1' value="ELIMINAR SELECCIONADOS"></input>
 
-			
-			</form>
-		</div><!--DIV BOTONES-->
-
-
-	
-
-
-	<div style="height: 30px; background: green;" class="col-md-12">
-		<h1> bajada</h1>
-		
-	</div>
+			</div>
+		</div>
 
 	</div><!--Container-->
 
 	<script src="./Resources/Jquery/jquery-3.2.1.min.js"></script>
 	<script src="./Resources/Bootstrap/js/bootstrap.min.js"></script>
 	<script src="./Resources/App/js/crud_users.js"></script>
-	<script src="./action.js"></script>
+	<script src="./Resources/App/js/logged.js"></script>
+	<script src="./Resources/App/js/action.js"></script>
 
 
 </body>

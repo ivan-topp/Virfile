@@ -83,11 +83,11 @@ $(document).ready(function() {
 						    contentType: false,
 						    processData: false,
 						}).done(function(data) {
-							data = JSON.parse(data);
+							/*data = JSON.parse(data);
 							if(Object.keys(data).indexOf('Error') == -1){
 					   			console.log(data);
 					   		}else $('#upError').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert">&times;</a><strong>Error!</strong> '+data.Error+'</div>');
-							console.log(data);
+							*/console.log(data);
 						});
 					}else $('#upError').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert">&times;</a><strong>Error!</strong> No se ha podido subir el archivo porque excede el limite de 100Mb.</div>'); 
     			}
@@ -149,6 +149,7 @@ $(document).ready(function() {
 	});
 	$('#mkdir').click(function(){
 		$('#newFolderError').html('');
+		console.log(currentDir+'/'+$('#nameDir').val().trim());
 		if($('#nameDir').val() != ''){
 			if(valid1.test($('#nameDir').val())){
 				setTimeout(function(){
@@ -158,11 +159,12 @@ $(document).ready(function() {
 					   	function(data, status){
 					   		if(status != "success"){console.log("Error al realizar la peticion.");}
 					   		else{
+					   			//console.log(data);
 					   			data = JSON.parse(data);
 					   			if(Object.keys(data).indexOf('Error') == -1){
 					   				console.log(data);
 					   				ListDir();
-					   			}else $('#newFolderError').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert">&times;</a><strong>Error!</strong> '+data.Error+'</div>');		
+					   			}else $('#newFolderError').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert">&times;</a><strong>Error!</strong> '+data.Error+'</div>');
 					   		}
 					   });
 				}, 20);
@@ -182,7 +184,6 @@ $(document).ready(function() {
 				   		if(status != "success"){console.log("Error al realizar la peticion.");}
 				   		else{
 				   			selectedContent = [];
-				   			console.log(data);
 				   			data = JSON.parse(data);
 					   		if(Object.keys(data).indexOf('Error') == -1){
 					   			console.log(data);
@@ -244,7 +245,7 @@ $(document).ready(function() {
 					    			data = JSON.parse(data);
 								   	if(Object.keys(data).indexOf('Error') == -1){
 								   		console.log(val.split(',')[0]);							   		
-								   		$('#downloadAux').append('<a class="Down" href="http://127.0.0.1:8090/Lenguaje%20de%20Marcado/VirFile/Downloads/'+val.split(',')[0]+'" download="'+val.split(',')[0]+'">Descargar: '+val.split(',')[0]+'</a>');
+								   		$('#downloadAux').append('<a class="Down" href="http://127.0.0.1/LM/VirFile/Downloads/'+val.split(',')[0]+'" download="'+val.split(',')[0]+'">Descargar: '+val.split(',')[0]+'</a>');
 								   		selectedContent = [];
 								   	}else console.log(data.Error);
 					    		}
