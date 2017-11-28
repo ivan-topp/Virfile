@@ -8,7 +8,7 @@
 			$data = $this->Model->login_access($user, $pass);
 			if($data != false){
 				$_SESSION['ID'] = $data['ID_User']; $_SESSION['Level'] = $data['User_Level'];
-				$_SESSION['Enterprise'] = $data['Enterprise']; $_SESSION['User_Name'] = $data['User_Name'];
+				$_SESSION['Enterprise'] = $data['ID_E'];
 				return $data;
 			}else{
 				return array ('Error'=>'Error de Autenticacion');

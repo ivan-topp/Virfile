@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-11-2017 a las 17:50:02
--- Versión del servidor: 10.1.28-MariaDB
--- Versión de PHP: 7.1.10
+-- Tiempo de generación: 28-11-2017 a las 19:56:16
+-- Versión del servidor: 10.1.25-MariaDB
+-- Versión de PHP: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -38,45 +38,8 @@ CREATE TABLE `enterprise` (
 --
 
 INSERT INTO `enterprise` (`ID_E`, `Name`) VALUES
-(28, 'google'),
-(29, 'nueva'),
-(30, 'nueva'),
-(31, 'nueva2'),
-(32, 'nueva2'),
-(33, 'Minueva EmPRESAA'),
-(34, 'Minueva EmPRESAA'),
-(35, 'GOO'),
-(36, 'GOO'),
-(37, 'GOOGLEEEEE'),
-(38, 'GOOGLEEEEE'),
-(39, '2123'),
-(40, '2123'),
-(41, 'csdc'),
-(42, 'csdc'),
-(43, 'kjfvnkjdn'),
-(44, 'kjfvnkjdn'),
-(45, 'kcsdmc'),
-(46, 'kcsdmc'),
-(47, '111111111klKLMK'),
-(48, '111111111klKLMK'),
-(49, '1212'),
-(50, '1212'),
-(51, 'VFDFVFD'),
-(52, 'VFDFVFD'),
-(53, 'CSCSCD'),
-(54, 'CSCSCD'),
-(55, 'CSCSCD'),
-(56, 'CSCSCD'),
-(57, 'CSCSCD'),
-(58, 'CSCSCD'),
-(59, 'CSCSCD'),
-(60, 'CSCSCD'),
-(61, 'csdcsdccs'),
-(62, 'csdcsdccs'),
-(63, 'cdsc'),
-(64, 'hjbhjb'),
-(65, 'bcbggb'),
-(66, 'asdasda');
+(1, 'VirFile'),
+(28, 'google');
 
 -- --------------------------------------------------------
 
@@ -112,7 +75,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`ID_User`, `User_Name`, `ID_E`, `Stock`, `Name`, `Mail`, `Password`, `User_Level`) VALUES
-(1, 'Cristobal', 28, 0, 'Crist', 'cristobal@gmail.com', '123', 2);
+(1, 'Cristobal', 28, 0, 'Crist', 'cristobal@gmail.com', '123', 2),
+(2, 'Ivan', 1, 0, 'Ivan Topp', 'ivan.topp.sandoval@gmail.com', '123', 0);
 
 --
 -- Índices para tablas volcadas
@@ -147,19 +111,16 @@ ALTER TABLE `user`
 --
 ALTER TABLE `enterprise`
   MODIFY `ID_E` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
-
 --
 -- AUTO_INCREMENT de la tabla `file`
 --
 ALTER TABLE `file`
   MODIFY `ID_F` int(3) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID_User` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `ID_User` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Restricciones para tablas volcadas
 --

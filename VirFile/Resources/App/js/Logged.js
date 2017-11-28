@@ -1,6 +1,6 @@
 var get = function (id){return document.getElementById(id);}
 var currentDir = "";
-var UserId = "";
+var baseDir = "";
 var selectedContent = [];
 var valid1 = /^[a-zA-ZÀ-ÿ0-9 \u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ0-9 \u00f1\u00d1]*)*[a-zA-ZÀ-ÿ0-9 \u00f1\u00d1]+$/;
 var ListDir = function(){
@@ -47,7 +47,8 @@ $(document).ready(function() {
 	    		if(status != "success"){console.log("Error al realizar la peticion.");}
 	    		else{
 	    			currentDir = data;
-	    			UserId = data;
+	    			baseDir = data;
+	    			console.log(baseDir);
 	    			ListDir();
 	    		}
 	    });	
@@ -128,7 +129,7 @@ $(document).ready(function() {
 		}
 	});
 	$('#Back').click(function(){
-		if(currentDir != UserId){
+		if(currentDir != baseDir){
 			selectedContent=[];
 			var aDir = currentDir.split('/');
 			currentDir = '';

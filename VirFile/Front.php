@@ -35,7 +35,7 @@
 		    	}
 		    	break;
 		    case "getUserId":
-		    	if(isset($_SESSION['ID'])) echo $_SESSION['ID'];
+		    	if(isset($_SESSION['ID'])) echo $_SESSION['Enterprise'].'/'.$_SESSION['ID'];
 		    	break;
 		    case "CreateDir":
 		    	if(isset($_SESSION['ID'])){
