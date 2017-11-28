@@ -1,21 +1,49 @@
 <?php
-
 	require_once('./Db/db.php');
 	class userModel{
+		private $sqlUpdate = "UPDATE user SET Stock = :Stock WHERE ID_User = :User"; //Maximo = 209715200 Bytes
+		private $sqlGetStock = "SELECT Stock FROM user WHERE ID_User = :User LIMIT 1";
+		private $db;
 		function __construct(){
 			$this->conn_id = ftp_connect('127.0.0.1');
 			$this->login = ftp_login($this->conn_id, 'VirFile', 'admin');
+			$this->db = Database::Connect();
+		}
+		public function getStock(){
+			$query = $this -> db -> prepare($this -> sqlGetStock);
+			$query->execute(array(':User'=>$_SESSION['ID']));
+			$rows=$query->fetch(PDO::FETCH_ASSOC);
+			if($query->rowCount()>0){
+				return $rows['Stock'];
+			}
+			else{
+				return False;
+			}
+		}
+		public function updateStock($newStock){
+			try{
+				$query = $this -> db -> prepare($this -> sqlUpdate);
+				$query->execute(array(':Stock'=> $newStock, ':User'=>$_SESSION['ID']));
+				return true;
+			}
+			catch(PDOException $e){
+				echo $e->getMessage();
+				return false;
+			}
+			
 		}
 
-		public function upFile($name, $temp){
+		public function upFile($name, $temp, $size){
+			$res = false;
 			if($this->login && $this->conn_id){
-				if(ftp_put($this->conn_id, $name, $temp,FTP_BINARY)){
-					$this->ftpFree();
-					return true;
-				}else{
-					$this->ftpFree();
-					return false;
-				}
+				$userStock = $this->getStock();
+				if(($userStock + $size) < 209715200){
+					if($this->updateStock($userStock + $size)){
+						if(ftp_put($this->conn_id, $name, $temp,FTP_BINARY)) $res = true;
+					}
+				}else $res = "Error de Capacidad";
+				$this->ftpFree();
+				return $res;
 			}else{
 				return false;
 			}
@@ -63,9 +91,15 @@
 
 		public function ftpRemoveFile($name){
 			if($this->login && $this->conn_id){
-				if (ftp_delete($this->conn_id, $name)) {
-					return array('Result'=>'Archivo eliminado Satisfactoriamente.');
-				} else {
+				$size = ftp_size($this->conn_id, $name);
+				$userSize = $this->getStock();
+				if($this->updateStock($userSize - $size)){
+					if (ftp_delete($this->conn_id, $name)) {
+						return array('Result'=>'Archivo eliminado Satisfactoriamente.');
+					} else {
+						return false;
+					}
+				}else{
 					return false;
 				}
 			}

@@ -5,11 +5,13 @@
 			$this->Model = new userModel();
 		}
 
-		public function uploadFile($name, $temp){
-			if($this->Model->upFile($name, $temp)){
-				return array('Result'=>'Archivo subido correctamente.');
+		public function uploadFile($name, $temp, $size){
+			$res = $this->Model->upFile($name, $temp, $size);
+			if($res != false){
+				if($res != "ErrorPeroSubido" and $res != "Error de Capacidad") return array('Result'=>'Archivo subido correctamente.');
+				else if($res == "Error de Capacidad") array('Error'=>'Haz Exedido la capacidad maxima.');
 			}else{
-				return array('Result'=>'Problemas al subir el archivo.');
+				return array('Error'=>'Problemas al subir el archivo.');
 			}
 		}
 

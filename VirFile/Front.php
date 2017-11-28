@@ -23,8 +23,8 @@
 		    		$userController = new userController();
 		    		$name = $_POST["curDir"].'/'.$_FILES['upload']['name'];
 					$temp = $_FILES["upload"]["tmp_name"];
-					$res = $userController->uploadFile($name, $temp);
-					echo $res['Result'];
+					$res = $userController->uploadFile($name, $temp, $_FILES["upload"]['size']);
+					echo json_encode($res);
 		    	}
 		    	break;
 		    case "ListDir":

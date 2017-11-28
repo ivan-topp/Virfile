@@ -48,7 +48,6 @@ $(document).ready(function() {
 	    		else{
 	    			currentDir = data;
 	    			baseDir = data;
-	    			console.log(baseDir);
 	    			ListDir();
 	    		}
 	    });	
@@ -84,6 +83,10 @@ $(document).ready(function() {
 						    contentType: false,
 						    processData: false,
 						}).done(function(data) {
+							data = JSON.parse(data);
+							if(Object.keys(data).indexOf('Error') == -1){
+					   			console.log(data);
+					   		}else $('#upError').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert">&times;</a><strong>Error!</strong> '+data.Error+'</div>');
 							console.log(data);
 						});
 					}else $('#upError').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert">&times;</a><strong>Error!</strong> No se ha podido subir el archivo porque excede el limite de 100Mb.</div>'); 
@@ -179,7 +182,7 @@ $(document).ready(function() {
 				   		if(status != "success"){console.log("Error al realizar la peticion.");}
 				   		else{
 				   			selectedContent = [];
-				   			//console.log(data);
+				   			console.log(data);
 				   			data = JSON.parse(data);
 					   		if(Object.keys(data).indexOf('Error') == -1){
 					   			console.log(data);
