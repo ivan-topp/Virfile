@@ -3,30 +3,30 @@
 	if(!isset($_SESSION['ID']) and !isset($_SESSION['Level']) and !isset($User)){
 		header("Location: ./index.php");
 	}
+	/*
 	echo "TU USER : ".$_SESSION['ID']."<br>";
 	echo "TU LEVEL: ".$_SESSION['Level']."<br>";
-	echo "TU EMPRESA: ".$_SESSION['Enterprise'];
+	echo "TU EMPRESA: ".$_SESSION['Enterprise']."<br>";
+	echo "TU NOMBRE : ".$_SESSION['User_Name'];*/
 ?>
 <?php include('./View/header.php');?>
-
+<?php include('./createModal.php');?>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>VIRFILE</title>
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/bootstrap-theme.css">
-	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/estilo.css">
+	<link rel="stylesheet" href="./Resources/Bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="./Resources/App/css/styles.css">
+
 </head>
 <body>
 
 	<div class="container">
 
 		<div style="margin-top: -3px;" class="row">
+			<form action="index.php" method="post">
 			<nav class="navbar navbar-inverse">
 			  <div class="container-fluid">
 			    <div class="navbar-header">
@@ -36,36 +36,29 @@
 			    <ul class="nav navbar-nav">			    	
 				    	<li class="active"><a href="index.html">Inicio</a></li>
 				      	<li><a href="gallery.html">Que ofrecemos</a></li>
-				      	<li><a href="menu.html">Contacto</a></li>			      	
-				</div>
-			      	<div class="col-md-2" style="margin-top: 8px; margin-left: 130px; ">
+				      	<li><a href="menu.html">Contacto</a></li>
+				      	<li><a id="modal" href='#' data-toggle='modal' data-target='#modal'>LISTAR USUARIO</a></li>
+				</ul>
+				</form>						      	
+				</div>	
 
-			      		<div class="dropdown">
-							
-
-							
-
-				      		
-					<div class="dropdown">
-							<form action="index.php" method="POST">
-				      				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><?php echo $_SESSION["ID"]; ?>
-								  <span class="glyphicon glyphicon-user"></span>
-								  <ul class="dropdown-menu">
-								    <li><a href="#">Mi cuenta</a></li>
-								    <li><a href="#">Cambiar Imagen</a></li>
-								    <li><a href="#">Salir</a></li>
-								  </ul>
-								</button>
-								<input type="submit" name="Logout" id="Logout" value="Logout" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" value="Salir"></input>
-								<input id="btnlist1" value="Listar Usuarios" name="btnlist" class="btn" style="width:110px; margin-bottom: 8px;" type="submit"></input>
-								<input type="hidden" name="empre" value= <?php echo $_SESSION['Enterprise']; ?> >
-							</form>
-					<div>
-
-			      	</div>		      
-			    </ul>
-			  </div>
+				
+				<div class="dropdown">
+					<form action="index.php" method="POST">
+						<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span><?php echo $_SESSION["User_Name"]; ?>
+							<ul class="dropdown-menu">
+								<li><a href="#">Mi cuenta</a></li>
+								<li><a href="#">Cambiar Imagen</a></li>
+								<li><a href="#">Salir</a></li>
+							</ul>
+						</button>
+						<input type="submit" name="Logout" id="Logout" value="Logout" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" value="Salir"></input>
+						<input id="btnlist1" value="Listar Usuarios" name="btnlist" class="btn" style="width:110px; margin-bottom: 8px;" type="submit"></input>
+						<input type="hidden" name="empre" value= <?php echo $_SESSION['Enterprise']; ?> >
+					</form>
+			  	</div>
 			</nav>
+
 		</div>
 		
 		<!--DIV CARPETAS-->
@@ -76,60 +69,19 @@
 
 				<div class="row url-search"><span style="margin-top: 2px;" class="glyphicon glyphicon-map-marker" style="margin-right: 2px;"></span> Perico:/</div>
 
-			</div>
-			<div class="row" style="height: 740px;margin-left: 30px;margin-right: 3px;margin-top: 20px; display: none"> <!--CARPETAS!-->
-				
-				<!--ARCHIVO O CARPETA-->
-				<div class="col-md-1 icon" "><div class="row folder-ico"></div><div class="row" style="height: 25%">Title</div></div>
-				<!--ARCHIVO O CARPETA-->
-				<div class="col-md-1 icon" "><div class="row folder-ico"></div><div class="row" style="height: 25%">Title</div></div>
-				<!--ARCHIVO O CARPETA-->
-				<div class="col-md-1 icon" "><div class="row folder-ico"></div><div class="row" style="height: 25%">Title</div></div>
-				<!--ARCHIVO O CARPETA-->
-				<div class="col-md-1 icon" "><div class="row folder-ico"></div><div class="row" style="height: 25%">Title</div></div>
-				<!--ARCHIVO O CARPETA-->
-				<div class="col-md-1 icon" "><div class="row folder-ico"></div><div class="row" style="height: 25%">Title</div></div>
-				<!--ARCHIVO O CARPETA-->
-				<div class="col-md-1 icon" "><div class="row folder-ico"></div><div class="row" style="height: 25%">Title</div></div>
-				<!--ARCHIVO O CARPETA-->
-				<div class="col-md-1 icon" "><div class="row folder-ico"></div><div class="row" style="height: 25%">Title</div></div>
-				<!--ARCHIVO O CARPETA-->
-				<div class="col-md-1 icon" "><div class="row folder-ico"></div><div class="row" style="height: 25%">Title</div></div>
-				<!--ARCHIVO O CARPETA-->
-				<div class="col-md-1 icon" "><div class="row folder-ico"></div><div class="row" style="height: 25%">Title</div></div>
-				<!--ARCHIVO O CARPETA-->
-				<div class="col-md-1 icon" "><div class="row folder-ico"></div><div class="row" style="height: 25%">Title</div></div>
-			</div><!--CIERRE DE CARPETAS!-->
+			</div>	
 			<div class="row" style="height: 740px;margin-left: 30px;margin-right: 3px;margin-top: 20px; display: block;"> <!--- INICIO DIV CONTROL DE USUARIOS -->
-				<input type="button" id="add_user" name="add_user" value="Agregar Usuarios">
-				<input type="button" id="delete_user" name="delete_user" value="Eliminar Usuarios">
-				<br><br>
-				<table>
-					<tr>
-						<td>
-							Nombre de Usuario <input type="text" id="user_name" name="user_name" value=""><br>
-		
-							Nombre <input type="text" id="user_alone" name="user_alone" value=""><br>
-			
-							Mail <input type="text" id="user_mail" name="user_mail" value=""><br>
-				
-							Contraseña <input type="text" id="user_pass" name="user_pass" value=""><br>	
-						</td>
-					</tr>
+				<div id="Files">
 					
-				</table>
+				</div>				
+				<div id="Lista" class="hidden">
+					<table id="ListUsers" class="table table-responsive" border="1">
+					
+					
+					</table>
+					<input type="button" id='btndelete1' value="ELIMINAR SELECCIONADOS"></input>
 
-			</div> <!--- CIERRE DIV CONTROL DE USUARIOS -->
-
-			<div style="margin-left: 3px;margin-right: 3px;margin-top: -30px;" class="row"><!--BARRA DE PROGRESO!-->
-				<div class="progress">
-				  <div class="progress-bar" role="progressbar" aria-valuenow="70"
-				  aria-valuemin="0" aria-valuemax="100" style="width:70%">
-				    70%
-				  </div>
 				</div>
-			</div><!--BARRA DE PROGRESO!-->
-
 		</div><!--CIERRE DE DIV CARPETAS-->
 
 		
@@ -144,7 +96,6 @@
 
 			<form action="./index.php" method="POST" enctype="multipart/form-data" id="UploadFile">
 				<input  name="upload" type="file" id="arch" /><br>
-			
 
 				<button class="btn" style="width:110px; margin-bottom: 8px;" type=""><span class="glyphicon glyphicon-floppy-save"></span>  Descargar</button>
 				<button class="btn" style="width:110px; margin-bottom: 8px;" type=""><span class="glyphicon glyphicon-floppy-remove"></span>  Eliminar</button>
@@ -172,11 +123,9 @@
 
 	<script src="./Resources/Jquery/jquery-3.2.1.min.js"></script>
 	<script src="./Resources/Bootstrap/js/bootstrap.min.js"></script>
-	<script src="./Resources/App/js/Logged.js"></script>
 	<script src="./Resources/App/js/crud_users.js"></script>
-		
-	<script src="./list.js"></script>
-	<script src="./delete.js"></script>
+	<script src="./action.js"></script>
+
 
 </body>
 </html>

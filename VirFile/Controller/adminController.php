@@ -16,8 +16,8 @@
 		function Listar(){
 			return $this->Model->User_List();
 		}
-		function Eliminar(){
-			return $this->Model->User_Delete();
+		function Eliminar($id){
+			return $this->Model->User_Delete($id);
 		}
 	}
 ?>

@@ -1,6 +1,7 @@
 <?php
 	require_once('./Controller/loginController.php');
 	require_once('./Controller/userController.php');
+	require_once('./Controller/adminController.php');
 	header('Access-Control-Allow-Origin: *');
 	session_start();
 	$Login = new loginController();
@@ -66,6 +67,29 @@
 		    	}
 		    	//echo "Descargando: ".$_POST["Name"]." En la Ruta: ".$_POST["Path"];
 		    	break;
+		    case "list":
+		    	$adm=new adminController();
+				$res = $adm->Listar();
+				if($res != false){
+					/*for ($i=0; $i <$res.count(); $i++) { 
+						$res
+					}*/
+					echo json_encode($res);
+				}else echo json_encode(array('Error'=>'ashdkahs'));
+				break;
+
+			case "delete":
+				$adm=new adminController();
+				$res = $adm->Eliminar($_POST['ID']);
+				if($res != false){
+					/*for ($i=0; $i <$res.count(); $i++) { 
+						$res
+					}*/
+					echo json_encode($res);
+				}else echo json_encode(array('Error'=>'ashdkahs'));
+				break;
+
+
 		    /*case 2:
 		        echo "i es igual a 2";
 		        break;*/
