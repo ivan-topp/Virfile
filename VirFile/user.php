@@ -1,11 +1,16 @@
 <?php
-	session_start();
-	if(!isset($_SESSION['ID']) and !isset($_SESSION['Level']) and !isset($User)){
+	if(!isset($_SESSION['ID']) and !isset($_SESSION['Level'])){
 		header("Location: ./index.php");
+	}else{
+		if(isset($_SESSION['Level'])){
+			if($_SESSION['Level'] != 0){
+				header("Location: ./index.php");
+			}
+		}
 	}
 ?>
 <?php include('./View/header.php');?>
-	<title>Hola</title>
+	<title>VirFile</title>
 </head>
 <body>
 	<?php include('./View/nav.php');?>
