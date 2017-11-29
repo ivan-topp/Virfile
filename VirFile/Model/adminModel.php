@@ -10,7 +10,7 @@
 					    FROM Enterprise
 						INNER JOIN user
 						on enterprise.ID_E = user.ID_E
-						WHERE user.ID_E = :ep;";
+						WHERE user.ID_E != :ep;";
 
 		private $sql1 = "DELETE FROM USER WHERE ID_User = :us;";
 		private $db;
