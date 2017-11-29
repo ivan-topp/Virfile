@@ -23,10 +23,12 @@
 				$new = new general_Controller();
 				$data= $new->register_User($_POST["UserName"],$_POST["Enterprise"],$_POST["Name"],$_POST["Mail"],$_POST["Pass"]);
 				echo json_encode($data);
+				break;
 			case "IdEnterpise":
 				$new = new general_Controller();
 				$data= $new->id($_POST["Enterprise"]);
 				echo json_encode($data);
+				break;
 			case "RegisterEnterprise":
 				$new = new general_Controller();
 				$data= $new->register_Enterprise($_POST["Enterprise"]);
@@ -36,7 +38,7 @@
 				$new = new general_Controller();
 				$data= $new->register_Admin($_POST["UserName"],$_POST["Enterprise"],$_POST["Name"],$_POST["Mail"],$_POST["Pass"]);
 				echo json_encode($data);
-
+				break;
 		    case "Up":
 		    	if(isset($_SESSION["User_Data"])){
 		    		$name = $_POST["curDir"].'/'.$_FILES['upload']['name'];

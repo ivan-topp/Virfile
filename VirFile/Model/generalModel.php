@@ -9,6 +9,8 @@
 		private $db;
 
 		function __construct(){
+			$this->conn_id = ftp_connect('127.0.0.1');
+			$this->login = ftp_login($this->conn_id, 'VirFile', 'admin');
 			$this->db = Database::Connect();
 		}
 
@@ -16,11 +18,26 @@
 			$query = $this -> db -> prepare($this -> get_id_enterprise);
 			if($query->execute(array(':enterprise'=>$Enterprise))){
 				$rows=$query->fetch(PDO::FETCH_ASSOC);
-
 				return $rows;
 			}
 			else{
 				return False;
+			}
+		}
+
+		
+		function createNewFolder($dir){
+			if($this->login && $this->conn_id){
+				$res = false;
+				set_error_handler(function(){}, E_WARNING);
+				if(ftp_mkdir($this->conn_id, ftp_pwd($this->conn_id).$dir)){
+					$res = true;
+				}
+				restore_error_handler();
+				ftp_close($this->conn_id);
+				return $res;
+			}else{
+				return false;
 			}
 		}
 
@@ -36,8 +53,9 @@
 
 		function get_register_Admin($User,$Enterprise,$Name,$Mail,$Pass){
 			$query = $this -> db -> prepare($this -> insert_admin);
-			if($query->execute(array(':user'=>$User,':enterprise'=>$Enterprise,':name'=>$Name , ':mail'=>$User, ':pass'=>$Pass))){
-				return True;
+			if($query->execute(array(':user'=>$User,':enterprise'=>$Enterprise,':name'=>$Name , ':mail'=>$Mail, ':pass'=>$Pass))){
+				if($this->createNewFolder($Enterprise.'/'.$User)) return True;
+				else return false;
 			}
 			else{
 				return False;
@@ -46,8 +64,9 @@
 
 		function get_register_User($User,$Enterprise,$Name,$Mail,$Pass){
 			$query = $this -> db -> prepare($this -> insert_user);
-			if($query->execute(array(':user'=>$User,':enterprise'=>$Enterprise,':name'=>$Name , ':mail'=>$User, ':pass'=>$Pass))){
-				return True;
+			if($query->execute(array(':user'=>$User,':enterprise'=>$Enterprise,':name'=>$Name , ':mail'=>$Mail, ':pass'=>$Pass))){
+				if($this->createNewFolder($Enterprise.'/'.$User)) return True;
+				else return false;
 			}
 			else{
 				return False;
