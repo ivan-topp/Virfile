@@ -12,5 +12,9 @@
 		function Eliminar($id){
 			return $this->Model->User_Delete($id);
 		}
+		function Editar($id,$uN,$N,$M,$Psw,$Lvl){
+			return $this->Model->Edit($id,$uN,$N,$M,$Psw,$Lvl);
+		}
+
 	}
 ?>

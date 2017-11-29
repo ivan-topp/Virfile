@@ -22,6 +22,9 @@
 </head>
 <body>
 
+	<?php include("./View/registerUserModal.html");?>
+	<?php include("./View/editUserModal.html");?>
+
 	<div class="container-fluid">
 		
 		<div style="margin-top: -3px;" class="row">
@@ -37,6 +40,7 @@
 				      	<li><a href="gallery.html">Que ofrecemos</a></li>
 				      	<li><a href="menu.html">Contacto</a></li>
 				      	<li><a id="modal" href='#' data-toggle='modal' data-target='#modal'>LISTAR USUARIO</a></li>
+
 				</ul>
 				</form>						      	
 				</div>	
@@ -44,15 +48,24 @@
 				
 				<div class="dropdown">
 					<form action="index.php" method="POST">
-						<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span><?php echo $_SESSION['User_Data']["User_Name"]; ?>
+						<button style="margin-top: 10px;" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span><?php echo $_SESSION['User_Data']["User_Name"]; ?>
 							<ul class="dropdown-menu">
 								<li><a href="#">Mi cuenta</a></li>
 								<li><a href="#">Cambiar Imagen</a></li>
 								<li><a href="#">Salir</a></li>
 							</ul>
 						</button>
-						<input type="submit" name="Logout" id="Logout" value="Logout" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" value="Salir"></input>
-						<input id="btnlist1" value="Listar Usuarios" name="btnlist" class="btn" style="width:110px; margin-bottom: 8px;" type="submit"></input>
+						<input style="margin-top: 10px;" type="submit" name="Logout" id="Logout" value="Logout" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" value="Salir"></input>
+						<input id="btnlist1" value="Listar User" name="btnlist" class="btn btn-warning" style="width:110px; padding-left: -10px; margin-top: 10px;" type="submit"></input>
+
+						
+
+						<button id="btnnew" name="btnnew" type="button" class="btn btn btn-success" data-toggle="modal" data-target="#modalRegisterUser" style="width:80px; padding-left: -10px; margin-top: 10px;">Add User</button>
+
+						
+						
+
+
 						<input type="hidden" name="empre" value= <?php echo $_SESSION['Enterprise']; ?> >
 					</form>
 			  	</div>
@@ -89,10 +102,10 @@
 		<div class="row">
 			<div id="Lista" class="hidden">
 				<table id="ListUsers" class="table table-responsive" border="1">
-					
-					
+										
 				</table>
-				<input type="button" id='btndelete1' value="ELIMINAR SELECCIONADOS"></input>
+				<input type="button" class="btn btn btn-danger" id='btndelete1' value="ELIMINAR SELECCIONADOS"></input>
+				<button id="btnedit" name="btnedit" type="button" class="btn btn btn-success" data-toggle="modal" data-target="#modalEditUser" style="width:80px; padding-left: -10px; ">Edit User</button>
 
 			</div>
 		</div>

@@ -23,12 +23,10 @@
 				$new = new general_Controller();
 				$data= $new->register_User($_POST["UserName"],$_POST["Enterprise"],$_POST["Name"],$_POST["Mail"],$_POST["Pass"]);
 				echo json_encode($data);
-				break;
 			case "IdEnterpise":
 				$new = new general_Controller();
 				$data= $new->id($_POST["Enterprise"]);
 				echo json_encode($data);
-				break;
 			case "RegisterEnterprise":
 				$new = new general_Controller();
 				$data= $new->register_Enterprise($_POST["Enterprise"]);
@@ -37,6 +35,10 @@
 			case "RegisterAdmin":
 				$new = new general_Controller();
 				$data= $new->register_Admin($_POST["UserName"],$_POST["Enterprise"],$_POST["Name"],$_POST["Mail"],$_POST["Pass"]);
+				echo json_encode($data);
+			case "Edit":
+				$new = new adminController();
+				$data= $new->Editar($_POST["ID"],$_POST["UserName"],$_POST["Name"],$_POST["Mail"],$_POST["Pass"],$_POST["Level"]);
 				echo json_encode($data);
 				break;
 		    case "Up":

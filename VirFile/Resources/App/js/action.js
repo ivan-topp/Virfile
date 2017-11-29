@@ -64,6 +64,78 @@ $(document).ready(function() {
     	//event.preventDefault();
     });
 
+	/*$('#btnedit').click(function(){
+		$("input:checkbox:checked").each(function() {
+			console.log(parseInt($(this).attr('id')));
+			var id = $(this).attr('id');	
+			var Datos = { Action : "Edit_User"};
+			$.post("./Front.php",
+				Datos,
+		    	function(data, status){
+		    		if(status != "success"){console.log("Error al realizar la peticion.");}
+		    		else{
+		    			console.log("Data: " + data);
+		    		}
+		    	});		
+
+		});	
+	});*/
+
+
+	$('#editUser').click(function(){
+		$("input:checkbox:checked").each(function() {
+			//console.log(parseInt($(this).attr('id')));
+			var id = $(this).attr('id');	
+			var switchs= parseInt($('#editUserLevel').val());
+			//console.log(switchs);
+			if(switchs==0 || switchs==1){
+				
+				var Datos = { Action : "Edit", ID : parseInt(id) , UserName : $('#editUserUserName').val(), Name : $('#editUserName').val(), Mail : $('#editUserMail').val(), Pass : $('#editUserPass').val(), Level : parseInt($('#editUserLevel').val())};
+				console.log(Datos);
+				$.post("./Front.php",
+					Datos,
+		    		function(data, status){
+		    			if(status != "success"){console.log("Error al realizar la peticion.");}
+		    			else{
+		    				console.log("HOLA");
+			    			data = JSON.parse(data);
+			    			if(Object.keys(data).indexOf('Error') == -1){
+			    				console.log(data);
+			    				//location.reload();//location.href='./user.php';
+			    			}else $('#_status').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert">&times;</a><strong>Error!</strong> Los datos ingresados no son correctos, asegurate de haber ingresado bien tus datos.</div>');
+			    		}
+		    		});
+		    }else $('#_status').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert">&times;</a><strong>Error!</strong> Los datos ingresados no son correctos, asegurate de haber ingresado bien tus datos.</div>'); 
+		});	
+	});
+	$('#registerUser').click(function(){
+		
+		var switchs= parseInt($('#registerUserLevel').val());
+		var empresa= parseInt($('#registerUserEnterprise').val());
+		console.log(switchs);
+		if(switchs==0 || switchs==1){
+			var flag="RegisterUser";
+			if(switchs==1){
+				flag="RegisterAdmin";
+			}
+			var Datos = Register_A={ Action : flag, Name : $('#registerUserName').val(), UserName : $('#registerUserUserName').val(), Mail : $('#registerUserMail').val(), Pass : $('#registerUserPass').val(), Enterprise : empresa};
+			console.log(Datos);
+			$.post("./Front.php",
+				Datos,
+	    		function(data, status){
+	    			if(status != "success"){console.log("Error al realizar la peticion.");}
+	    			else{
+		    			data = JSON.parse(data);
+		    			if(Object.keys(data).indexOf('Error') == -1){
+		    				console.log(data);
+		    				//location.reload();//location.href='./user.php';
+		    			}else $('#_status').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert">&times;</a><strong>Error!</strong> Los datos ingresados no son correctos, asegurate de haber ingresado bien tus datos.</div>');
+		    		}
+	    		});
+	    }else $('#_status').html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert">&times;</a><strong>Error!</strong> Los datos ingresados no son correctos, asegurate de haber ingresado bien tus datos.</div>');
+	
+		
+	});
     	/*
 		var Datos = { Action : "delete"};
 		$.post("./recibe.php",
