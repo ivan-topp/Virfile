@@ -4,12 +4,21 @@
 	class adminModel extends userModel{
 		private $sqlUpdate = "UPDATE user SET Stock = :Stock WHERE ID_User = :User"; //Maximo = 209715200 Bytes
 		private $sqlGetStock = "SELECT Stock FROM user WHERE ID_User = :User LIMIT 1";
-		private $sql  = "SELECT * FROM USER WHERE Enterprise = :ep;";
+		//private $sql  = "SELECT * FROM USER WHERE Enterprise = :ep;";
+
+		private $sql =  "SELECT user.ID_User, user.User_Name, user.Mail
+					    FROM Enterprise
+						INNER JOIN user
+						on enterprise.ID_E = user.ID_E
+						WHERE user.ID_E = :ep;";
+
 		private $sql1 = "DELETE FROM USER WHERE ID_User = :us;";
 		private $db;
 		function __construct(){
 			parent::__construct();
+			$this->db = Database::Connect();
 		}
+
 
 		function User_List(){
 			

@@ -9,21 +9,14 @@ $(document).ready(function() {
 	    		if(status != "success"){console.log("Error al realizar la peticion.");}
 	    		else{
 	    			$('.User').remove();
-
 	    			console.log("Data: " + data);
-	    			if(data != ''){
-						data = JSON.parse(data);
-		    			$('#ListUsers').append('<tr class="User"><td>ELIMINAR</td><td>ID USUARIO </td><td>NOMBRE USUARIO</td><td>CORREO</td></tr>');
-		    			data.forEach(function(val, indx){
-		    				//
-
-		    				$('#ListUsers').append('<tr class="User"><td><input type="checkbox" id="'+val.ID_User+'" name="numero[]"></td><td>'+val.ID_User+'</td><td>'+val.User_Name+'</td><td>'+val.Mail+'</td></tr>');
-		    				console.log(val);
-		    			});
-	    			}
-		    			
+	    			data = JSON.parse(data);
+	    			$('#ListUsers').append('<tr class="User"><td>ELIMINAR</td><td>ID USUARIO </td><td>NOMBRE USUARIO</td><td>CORREO</td></tr>');
+	    			data.forEach(function(val, indx){
+	    				$('#ListUsers').append('<tr class="User"><td><input type="checkbox" id="'+val.ID_User+'" name="numero[]"></td><td>'+val.ID_User+'</td><td>'+val.User_Name+'</td><td>'+val.Mail+'</td></tr>');
+	    				console.log(val);
+	    			});
 	    		}
-	        	
 	    });
 	}
 	$('#Logout').click(function(event){
