@@ -2,6 +2,7 @@
 	require_once('./Controller/loginController.php');
 	require_once('./Controller/userController.php');
 	require_once('./Controller/adminController.php');
+	require_once('./Controller/generalController.php');
 	header('Access-Control-Allow-Origin: *');
 	session_start();
 	$Login = new loginController();
@@ -18,6 +19,24 @@
 		    	$Login->Logout();
 		        echo true;
 		        break;
+		    case "RegisterUser":
+				$new = new general_Controller();
+				$data= $new->register_User($_POST["UserName"],$_POST["Enterprise"],$_POST["Name"],$_POST["Mail"],$_POST["Pass"]);
+				echo json_encode($data);
+			case "IdEnterpise":
+				$new = new general_Controller();
+				$data= $new->id($_POST["Enterprise"]);
+				echo json_encode($data);
+			case "RegisterEnterprise":
+				$new = new general_Controller();
+				$data= $new->register_Enterprise($_POST["Enterprise"]);
+				echo json_encode($data);
+				break;
+			case "RegisterAdmin":
+				$new = new general_Controller();
+				$data= $new->register_Admin($_POST["UserName"],$_POST["Enterprise"],$_POST["Name"],$_POST["Mail"],$_POST["Pass"]);
+				echo json_encode($data);
+
 		    case "Up":
 		    	if(isset($_SESSION["User_Data"])){
 		    		$name = $_POST["curDir"].'/'.$_FILES['upload']['name'];

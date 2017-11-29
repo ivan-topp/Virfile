@@ -11,5 +11,9 @@
 			include('./vistadmin.php');
 			//header("Location: ./vistadmin.php");
 		}
+		if($_SESSION['Level']==2){
+			include('./general.php');
+			//header("Location: ./vistadmin.php");
+		}
 	}
 ?>
