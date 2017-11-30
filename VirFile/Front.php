@@ -137,7 +137,7 @@
 					echo json_encode($res);
 				}else echo json_encode(array('Error'=>'ashdkahs'));
 				break;
-				
+
 		    case "listUsers":
 		    	$adm=new general_Controller();
 				$res = $adm->ListarUsuarios();
@@ -173,6 +173,12 @@
 				}else echo json_encode(array('Error'=>'ashdkahs'));
 				break;
 
+
+			case "Add":
+				$new = new adminController();
+				$data= $new->register_User($_POST["UserName"],$_POST["Enterprise"],$_POST["Name"],$_POST["Mail"],$_POST["Pass"],$_POST["Level"]);
+				echo json_encode($data);
+				break;
 
 		    /*case 2:
 		        echo "i es igual a 2";
