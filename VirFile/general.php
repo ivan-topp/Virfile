@@ -22,13 +22,13 @@
 				<div class="options">
 					<h1>Opciones</h1>
 					<button type="button" id="listUser" class="btn btn-default btn-block"><span class="glyphicon glyphicon-stats"></span>Gestionar Empresas</button>
-					<button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#listEnterprise"><span class="glyphicon glyphicon-stats"></span>Listar Empresas</button>
+					<button id="ListadoEmpresas" type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#listEnterprise"><span class="glyphicon glyphicon-stats"></span>Listar Empresas</button>
 
 					<button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#modalRegisterEnterprise"><span class="glyphicon glyphicon-paste"></span>Registrar Empresa</button>
 
 					<button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#modalRegisterUser"><span class="glyphicon glyphicon-user"></span>Registrar Usuarios</button>
 
-					<button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#listUsers"><span class="glyphicon glyphicon-user"></span>Listar Usuarios</button>
+					<button id="ListadoUsuarios" type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#listUsers"><span class="glyphicon glyphicon-user"></span>Listar Usuarios</button>
 
 
 

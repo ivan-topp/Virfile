@@ -23,10 +23,12 @@
 				$new = new general_Controller();
 				$data= $new->register_User($_POST["UserName"],$_POST["Enterprise"],$_POST["Name"],$_POST["Mail"],$_POST["Pass"]);
 				echo json_encode($data);
+				break;
 			case "IdEnterpise":
 				$new = new general_Controller();
 				$data= $new->id($_POST["Enterprise"]);
 				echo json_encode($data);
+				break;
 			case "RegisterEnterprise":
 				$new = new general_Controller();
 				$data= $new->register_Enterprise($_POST["Enterprise"]);
@@ -36,6 +38,7 @@
 				$new = new general_Controller();
 				$data= $new->register_Admin($_POST["UserName"],$_POST["Enterprise"],$_POST["Name"],$_POST["Mail"],$_POST["Pass"]);
 				echo json_encode($data);
+				break;
 			case "Edit":
 				$new = new adminController();
 				$data= $new->Editar($_POST["ID"],$_POST["UserName"],$_POST["Name"],$_POST["Mail"],$_POST["Pass"],$_POST["Level"]);
@@ -81,7 +84,7 @@
 		    			$userController =  new userController();
 		    			$res = $userController->createDir($_POST["DirectoryName"]);
 		    		}
-		    		else if($_SESSION['Level']==1) { 
+		    		else if($_SESSION['Level']==1) {
 		    			$adminController =  new adminController();
 		    			$res = $adminController->createDir($_POST["DirectoryName"]);
 		    		}
@@ -127,7 +130,6 @@
 		    		}	
 		    		echo json_encode($res);
 		    	}
-		    	//echo "Descargando: ".$_POST["Name"]." En la Ruta: ".$_POST["Path"];
 		    	break;
 
 		    case "listEnterprise":
@@ -137,7 +139,7 @@
 					echo json_encode($res);
 				}else echo json_encode(array('Error'=>'ashdkahs'));
 				break;
-
+				
 		    case "listUsers":
 		    	$adm=new general_Controller();
 				$res = $adm->ListarUsuarios();
@@ -156,30 +158,32 @@
 
 			case "delete":
 				$adm=new adminController();
-				$res = $adm->Eliminar($_POST['ID']);
+				$res = $adm->Eliminar($_POST['ID'], $_POST['Name']);
 				if($res != false){
-					/*for ($i=0; $i <$res.count(); $i++) { 
-						$res
-					}*/
 					echo json_encode($res);
 				}else echo json_encode(array('Error'=>'ashdkahs'));
 				break;
 
 			case "deleteUser":
 				$adm=new general_Controller();
-				$res = $adm->EliminarUsuario($_POST['ID']);
+				$res = $adm->EliminarUsuario($_POST['ID'], $_POST['Name'], $_POST['empresa']);
 				if($res != false){
 					echo json_encode($res);
 				}else echo json_encode(array('Error'=>'ashdkahs'));
 				break;
 
-
+			case "deleteEnterprise":
+				$adm=new general_Controller();
+				$res = $adm->deleteEnterprise($_POST['ID']);
+				if($res != false){
+					echo json_encode($res);
+				}else echo json_encode(array('Error'=>'ashdkahs'));
+				break;
 			case "Add":
 				$new = new adminController();
 				$data= $new->register_User($_POST["UserName"],$_POST["Enterprise"],$_POST["Name"],$_POST["Mail"],$_POST["Pass"],$_POST["Level"]);
 				echo json_encode($data);
 				break;
-
 		    /*case 2:
 		        echo "i es igual a 2";
 		        break;*/

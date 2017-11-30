@@ -107,10 +107,11 @@
 				$this->conn_id = ftp_connect('127.0.0.1');
 				$this->login = ftp_login($this->conn_id, 'VirFile', 'admin');
 				$this->ftpRemoveFile($name);
-			}		
+			}
 		}
 		public function ftpRemoveDirectory($name){
 			if($this->login && $this->conn_id){
+				echo $name.'\n';
 				$buff = ftp_nlist($this->conn_id, ftp_pwd($this->conn_id).$name.'/');
 				if($buff != false){
 					sort($buff);

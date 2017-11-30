@@ -1,6 +1,7 @@
 <?php
+	require_once('./Controller/userController.php');
 	require_once('./Model/generalModel.php');
-	class general_Controller{
+	class general_Controller extends userController{
 		function __construct()
 		{
 			$this->Model = new general_Model();
@@ -19,8 +20,8 @@
 			return $this->Model->List_Enterprise();
 		}
 
-		function EliminarUsuario($id){
-			return $this->Model->Delete_User($id);
+		function EliminarUsuario($id, $name, $empresa){
+			return $this->Model->Delete_User($id, $name, $empresa);
 		}
 		function ListarUsuarios(){
 			return $this->Model->List_Users();
@@ -54,6 +55,9 @@
 			else{
 				return array ('Error'=>'Error de Autenticacion'); 
 			}
+		}
+		function deleteEnterprise($id){
+			return $this->Model->delete_Enterprise($id);
 		}
 
 	}
