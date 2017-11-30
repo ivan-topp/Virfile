@@ -22,7 +22,7 @@
 </head>
 <body>
 
-	<?php include("./View/registerUserModal.html");?>
+	<?php include("./View/createUserModal.html");?>
 	<?php include("./View/editUserModal.html");?>
 
 	<div class="container-fluid">
@@ -60,7 +60,7 @@
 
 						
 
-						<button id="btnnew" name="btnnew" type="button" class="btn btn btn-success" data-toggle="modal" data-target="#modalRegisterUser" style="width:80px; padding-left: -10px; margin-top: 10px;">Add User</button>
+						<button id="btnnew" name="btnnew" type="button" class="btn btn btn-success" data-toggle="modal" data-target="#modalCreateUser" style="width:80px; padding-left: -10px; margin-top: 10px;">Add User</button>
 
 						
 						

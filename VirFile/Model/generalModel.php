@@ -6,18 +6,21 @@
 		private $insert_enterprise="INSERT INTO enterprise(Name) VALUES (:enterprise)";
 		#private $delete_enterprise="DELETE ";
 		private $get_id_enterprise="SELECT ID_E FROM enterprise WHERE Name=:enterprise";
+
+		private $list_Users = "SELECT * FROM user WHERE ID_User!=:user";
+		private $list_Enterprise = "SELECT ID_E, enterprise.Name FROM enterprise WHERE 1";
+		private $delete_us = "DELETE FROM USER WHERE ID_User = :us;";
 		private $db;
 
 		function __construct(){
-			$this->conn_id = ftp_connect('127.0.0.1');
-			$this->login = ftp_login($this->conn_id, 'VirFile', 'admin');
 			$this->db = Database::Connect();
 		}
 
-		function get_id($Enterprise){
-			$query = $this -> db -> prepare($this -> get_id_enterprise);
-			if($query->execute(array(':enterprise'=>$Enterprise))){
-				$rows=$query->fetch(PDO::FETCH_ASSOC);
+
+		function List_Enterprise(){
+			$query = $this -> db -> prepare($this -> list_Enterprise);
+			$rows=$query->fetchAll();
+			if($query->rowCount()>0){
 				return $rows;
 			}
 			else{
@@ -25,19 +28,41 @@
 			}
 		}
 
-		
-		function createNewFolder($dir){
-			if($this->login && $this->conn_id){
-				$res = false;
-				set_error_handler(function(){}, E_WARNING);
-				if(ftp_mkdir($this->conn_id, ftp_pwd($this->conn_id).$dir)){
-					$res = true;
-				}
-				restore_error_handler();
-				ftp_close($this->conn_id);
-				return $res;
-			}else{
-				return false;
+		function Delete_User($id){
+			$this->db = Database::Connect();
+			$query = $this -> db -> prepare($this -> delete_us);
+			if($query->execute(array(':us'=>$id))){
+				return True;
+			}
+			else{
+				return False;
+			}	
+		}
+
+		function List_Users(){
+			
+			//function login_access($User,$Pass){
+			$query = $this -> db -> prepare($this -> list_Users);
+			$query->execute(array(':user'=>$_SESSION['ID']));
+			$rows=$query->fetchAll();//(PDO::FETCHALL);
+			if($query->rowCount()>0){
+				return $rows;
+			}
+			else{
+				return False;
+			}
+		}
+
+
+		function get_id($Enterprise){
+			$query = $this -> db -> prepare($this -> get_id_enterprise);
+			if($query->execute(array(':enterprise'=>$Enterprise))){
+				$rows=$query->fetch(PDO::FETCH_ASSOC);
+
+				return $rows;
+			}
+			else{
+				return False;
 			}
 		}
 
@@ -53,9 +78,8 @@
 
 		function get_register_Admin($User,$Enterprise,$Name,$Mail,$Pass){
 			$query = $this -> db -> prepare($this -> insert_admin);
-			if($query->execute(array(':user'=>$User,':enterprise'=>$Enterprise,':name'=>$Name , ':mail'=>$Mail, ':pass'=>$Pass))){
-				if($this->createNewFolder($Enterprise.'/'.$User)) return True;
-				else return false;
+			if($query->execute(array(':user'=>$User,':enterprise'=>$Enterprise,':name'=>$Name , ':mail'=>$User, ':pass'=>$Pass))){
+				return True;
 			}
 			else{
 				return False;
@@ -64,9 +88,8 @@
 
 		function get_register_User($User,$Enterprise,$Name,$Mail,$Pass){
 			$query = $this -> db -> prepare($this -> insert_user);
-			if($query->execute(array(':user'=>$User,':enterprise'=>$Enterprise,':name'=>$Name , ':mail'=>$Mail, ':pass'=>$Pass))){
-				if($this->createNewFolder($Enterprise.'/'.$User)) return True;
-				else return false;
+			if($query->execute(array(':user'=>$User,':enterprise'=>$Enterprise,':name'=>$Name , ':mail'=>$User, ':pass'=>$Pass))){
+				return True;
 			}
 			else{
 				return False;

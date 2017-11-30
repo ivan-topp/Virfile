@@ -15,7 +15,16 @@
 				return array ('Error'=>'Error De Autenticacion');
 			}
 		}
+		function ListarEmpresas(){
+			return $this->Model->List_Enterprise();
+		}
 
+		function EliminarUsuario($id){
+			return $this->Model->Delete_User($id);
+		}
+		function ListarUsuarios(){
+			return $this->Model->List_Users();
+		}
 
 		function register_Enterprise($Enterprise){
 			$data = $this->Model->get_register_Enterprise($Enterprise);

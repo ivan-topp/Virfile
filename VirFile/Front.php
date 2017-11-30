@@ -129,6 +129,23 @@
 		    	}
 		    	//echo "Descargando: ".$_POST["Name"]." En la Ruta: ".$_POST["Path"];
 		    	break;
+
+		    case "listEnterprise":
+		    	$adm=new general_Controller();
+				$res = $adm->ListarEmpresas();
+				if($res != false){
+					echo json_encode($res);
+				}else echo json_encode(array('Error'=>'ashdkahs'));
+				break;
+				
+		    case "listUsers":
+		    	$adm=new general_Controller();
+				$res = $adm->ListarUsuarios();
+				if($res != false){
+					echo json_encode($res);
+				}else echo json_encode(array('Error'=>'ashdkahs'));
+				break;
+
 		    case "list":
 		    	$adm=new adminController();
 				$res = $adm->Listar();
@@ -144,6 +161,14 @@
 					/*for ($i=0; $i <$res.count(); $i++) { 
 						$res
 					}*/
+					echo json_encode($res);
+				}else echo json_encode(array('Error'=>'ashdkahs'));
+				break;
+
+			case "deleteUser":
+				$adm=new general_Controller();
+				$res = $adm->EliminarUsuario($_POST['ID']);
+				if($res != false){
 					echo json_encode($res);
 				}else echo json_encode(array('Error'=>'ashdkahs'));
 				break;
